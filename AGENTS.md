@@ -89,3 +89,25 @@ faqs:                         # minimal 3
 - Semua halaman wajib punya JSON-LD `@graph` (lihat `src/lib/schema.ts`).
 - `overflow-x: clip` sudah diterapkan di `html, body` — jangan diganti `hidden`.
 - Setelah menambah halaman/konten, jalankan `npm run build` sampai exit code 0.
+
+## Deployment Target
+- **Platform:** DomaiNesia (cPanel)
+- **Target Path:** `interiorbaturaja`
+- **Metode:** Build lokal, lalu upload `dist/` via skill `cpanel-domainesia`.
+
+## Alur Rutin Commit, Push & Deploy (WAJIB IKUT SAAT DIMINTA)
+Alur standar setiap kali ada perubahan yang selesai dan diuji:
+
+1. **Build & verifikasi:** `npm run build` sampai exit code 0 (jangan deploy build yang gagal).
+2. **Commit:** `git add -A && git commit -m "<pesan commit ringkas dan spesifik>"`.
+3. **Push:** `git push origin main` (remote: `https://github.com/boimthinks/interior-baturaja.git`).
+4. **Deploy ke DomaiNesia:** `python3 /home/abah/.config/opencode/skills/cpanel-domainesia/scripts/deploy.py --target-dir interiorbaturaja`
+   - Flag `--target-dir interiorbaturaja` WAJIB karena nama folder server (`interiorbaturaja`)
+     berbeda dengan nama folder project lokal (`interiorbaturaja.web.id`). Tanpa flag itu
+     script berhenti dengan aman.
+   - Gunakan `--skip-build` bila `dist/` sudah terbaru dan tidak ada perubahan sejak build terakhir.
+5. **Verifikasi pasca-deploy:** `curl` beberapa URL kunci (homepage, satu halaman layanan, satu artikel)
+   dan pastikan status 200.
+
+Catatan: langkah 2-3 hanya dijalankan bila pengguna meminta commit/push secara eksplisit
+(sesuai aturan di bagian Komunikasi), sedangkan deploy ke DomaiNesia dieksekusi bila diminta.
