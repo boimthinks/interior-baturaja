@@ -1,0 +1,27 @@
+---
+import WhatsAppCTA from './WhatsAppCTA.astro';
+import { SITE } from '../config/site';
+
+interface Props {
+  title?: string;
+  text?: string;
+  message?: string;
+  label?: string;
+  note?: string;
+}
+
+const {
+  title = 'Wujudkan Interior Impian Anda Bersama Workshop di OKU Raya',
+  text = 'Konsultasikan kebutuhan kitchen set, lemari, backdrop TV, interior kantor, toko, atau booth pameran Anda. Kami bantu hitung kebutuhan, desain, dan RAB transparan.',
+  message = 'Halo Interior Baturaja, saya ingin konsultasi dan minta estimasi biaya interior.',
+  label = 'Konsultasi Gratis via WhatsApp',
+  note = `Workshop: ${SITE.workshop.street}, ${SITE.workshop.district}, ${SITE.workshop.city}`,
+} = Astro.props;
+---
+
+<section class="container final-cta reveal">
+  <h2>{title}</h2>
+  <p>{text}</p>
+  <WhatsAppCTA message={message} label={label} full />
+  <p class="muted" style="margin-top:16px;font-size:0.84rem;">{note} · {SITE.phoneDisplay}</p>
+</section>

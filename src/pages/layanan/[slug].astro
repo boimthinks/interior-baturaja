@@ -1,0 +1,24 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import { SERVICES } from '../../data/services';
+import { getPublishedPosts } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+
+  return SERVICES.map((service) => {
+    const related = posts
+      .filter(
+        (p) =>
+          p.data.category === 'Blog' &&
+          p.data.tags.some((t) => service.relatedTags.includes(t))
+      )
+      .slice(0, 3);
+    return { params: { slug: service.slug }, props: { service, related } };
+  });
+}
+
+const { service, related } = Astro.props;
+---
+
+<ServiceLayout service={service} related={related} />

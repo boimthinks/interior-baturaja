@@ -1,0 +1,86 @@
+---
+import { SITE } from '../config/site';
+
+interface Props {
+  label?: string;
+  class?: string;
+}
+
+const { label = 'Tambah Interior Baturaja sebagai Sumber Favorit di Google', class: className = '' } = Astro.props;
+const domain = SITE.domain;
+---
+
+<div class:list={['google-source-preferences', className]}>
+  <button
+    type="button"
+    class="btn-preferred-source"
+    data-domain={domain}
+    aria-label={`Tambah ${SITE.name} sebagai Sumber Favorit di Google Search`}
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+    </svg>
+    <span>{label}</span>
+  </button>
+</div>
+
+<script>
+  function setupGoogleSourcePreferences() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.btn-preferred-source');
+    buttons.forEach((btn) => {
+      if (btn.hasAttribute('data-initialized')) return;
+      btn.setAttribute('data-initialized', 'true');
+
+      btn.addEventListener('click', () => {
+        const domain = btn.dataset.domain || 'https://interiorbaturaja.web.id';
+        const win = window as unknown as {
+          google?: { news?: { sourcePreferences?: { showDialog: (o: object) => void } } };
+        };
+
+        if (win.google?.news?.sourcePreferences) {
+          try {
+            win.google.news.sourcePreferences.showDialog({ forceReload: true, sourceUrl: domain });
+            return;
+          } catch {
+            /* fallback di bawah */
+          }
+        }
+        window.open(
+          `https://www.google.com/preferences/source?q=${encodeURIComponent(domain)}`,
+          '_blank',
+          'noopener'
+        );
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', setupGoogleSourcePreferences);
+  document.addEventListener('astro:page-load', setupGoogleSourcePreferences);
+</script>
+
+<style>
+  .google-source-preferences { margin: 1.25rem 0 0; }
+  .btn-preferred-source {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-d) 100%);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.88rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.18);
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease);
+  }
+  .btn-preferred-source:hover {
+    background: linear-gradient(135deg, var(--c-primary-d) 0%, #0f172a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(30, 64, 175, 0.28);
+  }
+  .icon { width: 17px; height: 17px; flex-shrink: 0; }
+</style>

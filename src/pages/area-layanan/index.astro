@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE } from '../../config/site';
+import { AREAS } from '../../data/areas';
+import { businessSchema, organizationSchema, websiteSchema, breadcrumbSchema, itemListSchema } from '../../lib/schema';
+
+const url = new URL('/area-layanan/', SITE.domain).href;
+const schema = [
+  businessSchema(),
+  organizationSchema(),
+  websiteSchema(),
+  breadcrumbSchema([{ name: 'Area Layanan', url }]),
+  itemListSchema(
+    AREAS.map((a) => ({ name: a.name, url: new URL(`/area-layanan/${a.slug}/`, SITE.domain).href })),
+    url
+  ),
+];
+---
+
+<BaseLayout
+  title="Area Layanan Interior Baturaja, OKU Raya & Sekitarnya"
+  description="Jangkauan layanan Interior Baturaja: Kota Baturaja & Kab. OKU, Muaradua–Danau Ranau (OKU Selatan), Martapura–Belitang (OKU Timur), Muara Enim–Tanjung Enim, dan Prabumulih."
+  keywords={['area layanan interior baturaja', 'jasa interior OKU raya', 'interior sumatera selatan']}
+  image="/og/area-index.png"
+>
+  <JsonLd data={schema} />
+
+  <section class="hero hero-page">
+    <div class="container">
+      <Breadcrumbs items={[]} />
+      <p class="eyebrow">Jangkauan Wilayah</p>
+      <h1>Area Layanan Interior di OKU Raya &amp; Koridor Sekitarnya</h1>
+      <p class="lead">
+        Basis workshop kami di Banding Agung, OKU Selatan. Dari sana tim bergerak ke Baturaja, Muaradua, Martapura,
+        Belitang, Muara Enim, Tanjung Enim, dan Prabumulih.
+      </p>
+      <ul class="hero-badges">
+        <li><Icon name="pin" size={15} /> 5 kabupaten/kota</li>
+        <li><Icon name="truck" size={15} /> Pengiriman armada sendiri</li>
+        <li><Icon name="home" size={15} /> Survei terjadwal</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="container sections reveal">
+    <div class="card-grid">
+      <a class="area-card" href="/">
+        <h3>Baturaja &amp; Kabupaten OKU</h3>
+        <p>
+          Area utama: Baturaja Timur, Baturaja Barat, Air Paoh, Sukaraya, Kemelak, Sekar Jaya, Tanjung Baru, Tanjung
+          Agung, Pasar Baru, Lubuk Batang, dan Peninjauan.
+        </p>
+        <span class="sidebar-more-link">Lihat halaman utama →</span>
+        <div class="area-districts">Fokus: kitchen set, lemari, backdrop TV, rumah tinggal</div>
+      </a>
+      {AREAS.map((a) => (
+        <a class="area-card" href={`/area-layanan/${a.slug}/`}>
+          <h3>{a.name}</h3>
+          <p>{a.description}</p>
+          <span class="sidebar-more-link">Lihat layanan area →</span>
+          <div class="area-districts">Kecamatan: {a.districts.slice(0, 5).join(', ')}</div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="container sections reveal">
+    <p class="eyebrow">Logistik &amp; Komitmen</p>
+    <h2>Bagaimana Kami Bekerja di Luar Baturaja?</h2>
+    <div class="why-grid">
+      <article class="feature">
+        <span class="feature-num">01</span>
+        <h3>Survei terjadwal</h3>
+        <p>Kunjungan lokasi digabung per koridor agar biaya transportasi lebih efisien dan jadwal lebih pasti.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-num">02</span>
+        <h3>Produksi modular</h3>
+        <p>Modul dibuat dan diuji di workshop, lalu dirakit di lokasi untuk mempersingkat waktu kerja.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-num">03</span>
+        <h3>RAB transparan</h3>
+        <p>Biaya pengiriman, akomodasi, dan instalasi dicantumkan terpisah sejak penawaran awal.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-num">04</span>
+        <h3>Garansi tetap berlaku</h3>
+        <p>Garansi konstruksi dan hardware berlaku sama, baik proyek di Baturaja maupun luar kota.</p>
+      </article>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Lokasi Anda Belum Tercantum?"
+    text="Kirim lokasi dan jenis pekerjaan via WhatsApp. Kami akan konfirmasi apakah bisa dijangkau, estimasi transportasi, dan jadwal survei terdekat."
+  />
+</BaseLayout>

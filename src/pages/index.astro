@@ -1,0 +1,282 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import PostCard from '../components/PostCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import JsonLd from '../components/JsonLd.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, waLink, formatDate } from '../config/site';
+import { SERVICES } from '../data/services';
+import { AREAS } from '../data/areas';
+import { getBlogPosts, getPortfolioPosts, readingTime } from '../lib/content';
+import {
+  businessSchema,
+  organizationSchema,
+  websiteSchema,
+  faqSchema,
+  itemListSchema,
+} from '../lib/schema';
+
+const portfolio = (await getPortfolioPosts()).slice(0, 6);
+const blog = (await getBlogPosts()).slice(0, 3);
+
+const homeFaqs = [
+  {
+    question: 'Apakah Interior Baturaja melayani pembuatan kitchen set dan lemari custom di Baturaja?',
+    answer:
+      'Ya. Baturaja dan Kabupaten OKU adalah area layanan utama kami. Kami mengerjakan kitchen set, lemari pakaian custom, kamar set, backdrop TV, partisi, dan furniture custom untuk rumah, kantor, dan toko di Baturaja Timur, Baturaja Barat, Air Paoh, Sukaraya, Kemelak, Sekar Jaya, Tanjung Baru, Tanjung Agung, Pasar Baru, Lubuk Batang, dan Peninjauan.',
+  },
+  {
+    question: 'Berapa kisaran harga kitchen set per meter di Baturaja?',
+    answer:
+      'Multipleks 18mm dengan HPL Taco dan engsel soft-close berkisar Rp1.800.000–Rp2.600.000 per meter lari. Full PVC board anti rayap berkisar Rp2.500.000–Rp3.200.000 per meter lari. Harga final tergantung panjang kabinet, top table, aksesori, dan lokasi pemasangan.',
+  },
+  {
+    question: 'Apakah workshop benar-benar milik sendiri dan di mana lokasinya?',
+    answer:
+      'Workshop dan kantor kami berada di Jl. Pantai Bidadari Jembatan 1 Sugih Waras, Ranau, Kecamatan Banding Agung, Kabupaten OKU Selatan. Produksi dilakukan di workshop, sehingga rumah atau toko klien tidak dipenuhi debu dan bau lem.',
+  },
+  {
+    question: 'Apakah bisa mengerjakan interior kantor dinas dan tenant mall?',
+    answer:
+      'Bisa. Kami mengerjakan interior kantor dinas dan instansi di Baturaja, Martapura, dan Muaradua, serta fit-out tenant, island booth, dan renovasi toko di Citimall Baturaja dan Citimall Prabumulih dengan mengikuti guideline pengelola gedung.',
+  },
+  {
+    question: 'Bagaimana alur pemesanan dan berapa lama pengerjaannya?',
+    answer:
+      'Alurnya: konsultasi via WhatsApp, survei dan pengukuran, desain 3D serta RAB, produksi di workshop, lalu instalasi dan serah terima. Kitchen set rata-rata 14–21 hari kerja, lemari 10–16 hari kerja, dan proyek kantor/toko 3–5 minggu setelah desain disetujui.',
+  },
+  {
+    question: 'Apakah melayani area OKU Selatan, OKU Timur, Muara Enim, dan Prabumulih?',
+    answer:
+      'Ya. Kami melayani Muaradua dan Danau Ranau (OKU Selatan), Martapura dan Gumawang Belitang (OKU Timur), Muara Enim dan Tanjung Enim, serta Prabumulih. Biaya transportasi dan akomodasi dihitung terpisah dan dicantumkan dalam RAB.',
+  },
+];
+
+const schema = [
+  businessSchema(),
+  organizationSchema(),
+  websiteSchema(),
+  faqSchema(homeFaqs, SITE.domain + '/'),
+  itemListSchema(
+    SERVICES.map((s) => ({ name: s.shortTitle, url: new URL(`/layanan/${s.slug}/`, SITE.domain).href })),
+    SITE.domain + '/'
+  ),
+];
+---
+
+<BaseLayout
+  description={SITE.description}
+  keywords={[
+    'jasa interior baturaja',
+    'jasa pembuatan interior baturaja',
+    'kontraktor interior baturaja',
+    'kitchen set baturaja',
+    'lemari custom baturaja',
+    'interior kantor OKU',
+    'booth pameran baturaja',
+  ]}
+  image="/og/og-default.png"
+>
+  <JsonLd data={schema} />
+
+  {/* HERO */}
+  <section class="hero hero-home">
+    <div class="container">
+      <div class="hero-text">
+        <p class="eyebrow">Workshop Interior · Banding Agung, OKU Selatan</p>
+        <h1>Jasa Pembuatan Interior Baturaja &amp; OKU Raya</h1>
+        <p class="tagline">Kitchen Set, Lemari Custom, Kantor &amp; Fit-Out Komersial</p>
+        <p class="lead">
+          Dari dapur rumah di Air Paoh sampai tenant mall di Citimall Baturaja. Dikerjakan tim workshop sendiri dengan
+          multipleks 18mm, PVC anti rayap, dan finishing HPL Taco.
+        </p>
+        <div class="hero-cta">
+          <a class="wa-cta" href={waLink('Halo Interior Baturaja, saya ingin jadwalkan survei dan minta estimasi biaya interior.')} target="_blank" rel="noopener">
+            <Icon name="chat" size={17} /> Konsultasi Gratis
+          </a>
+          <a class="ghost-cta" href="/portfolio/">Lihat Portofolio</a>
+        </div>
+        <ul class="hero-badges">
+          <li><Icon name="check" size={15} /> Survei &amp; desain 3D</li>
+          <li><Icon name="check" size={15} /> RAB transparan</li>
+          <li><Icon name="check" size={15} /> Garansi tertulis</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {/* TRUST STRIP */}
+  <section class="container" style="margin-top:-34px;position:relative;z-index:5;">
+    <div class="why-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:0;">
+      <article class="feature"><span class="feature-num">01</span><h3>Workshop Sendiri</h3><p>Produksi di Banding Agung, OKU Selatan. Bukan makelar, bukan tukang harian lepas.</p></article>
+      <article class="feature"><span class="feature-num">02</span><h3>Material Jelas</h3><p>Multipleks 18mm, PVC board, HPL Taco, dan hardware yang bisa diservis.</p></article>
+      <article class="feature"><span class="feature-num">03</span><h3>Harga Terbuka</h3><p>RAB per item, bukan harga tebak-tebakan. Biaya luar kota dicantumkan terpisah.</p></article>
+      <article class="feature"><span class="feature-num">04</span><h3>Jangkauan OKU Raya</h3><p>Baturaja, Muaradua, Danau Ranau, Martapura, Belitang, Tanjung Enim, Prabumulih.</p></article>
+    </div>
+  </section>
+
+  {/* LAYANAN */}
+  <section class="container sections reveal">
+    <div class="section-head-flex">
+      <div>
+        <p class="eyebrow">Lima Pilar Layanan</p>
+        <h2>Yang Bisa Kami Kerjakan untuk Rumah &amp; Usaha Anda</h2>
+      </div>
+      <a class="ghost-cta" href="/layanan/">Lihat Semua Layanan</a>
+    </div>
+    <div class="card-grid">
+      {SERVICES.map((s) => (
+        <ServiceCard
+          href={`/layanan/${s.slug}/`}
+          title={s.title}
+          shortTitle={s.shortTitle}
+          description={s.description}
+          image={`/images/${s.slug}.webp`}
+        />
+      ))}
+    </div>
+  </section>
+
+  {/* HARGA */}
+  <section class="container sections reveal" id="harga">
+    <p class="eyebrow">Estimasi Biaya</p>
+    <h2>Tabel Harga Acuan Interior di Baturaja</h2>
+    <p>
+      Harga berikut adalah rentang awal untuk area Baturaja. Setelah pengukuran dan pemilihan material, kami menyusun
+      RAB final per item agar Anda tahu ke mana anggaran pergi.
+    </p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Jenis Pekerjaan</th><th>Spesifikasi Umum</th><th>Satuan</th><th>Estimasi</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Kitchen set multipleks + HPL</td><td>18mm, HPL Taco, engsel soft-close</td><td>m¹</td><td class="price-cell">Rp1.800.000 – Rp2.600.000</td></tr>
+          <tr><td>Kitchen set PVC anti rayap</td><td>PVC board 18mm, HPL Taco</td><td>m¹</td><td class="price-cell">Rp2.500.000 – Rp3.200.000</td></tr>
+          <tr><td>Lemari pakaian custom</td><td>Full plafon, sliding/swing</td><td>m²</td><td class="price-cell">Rp1.900.000 – Rp2.700.000</td></tr>
+          <tr><td>Backdrop TV &amp; partisi</td><td>HPL / WPC, LED opsional</td><td>m²</td><td class="price-cell">Rp1.700.000 – Rp2.500.000</td></tr>
+          <tr><td>Meja resepsionis kantor</td><td>HPL marmer, LED, laci</td><td>m¹</td><td class="price-cell">Rp2.000.000 – Rp2.800.000</td></tr>
+          <tr><td>Island booth mall</td><td>Rangka besi, HPL, kaca, track light</td><td>unit</td><td class="price-cell">Rp8.000.000 – Rp35.000.000</td></tr>
+          <tr><td>Renovasi interior toko</td><td>Rak, kasir, plafon, pencahayaan</td><td>m²</td><td class="price-cell">Rp1.500.000 – Rp2.800.000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="font-size:0.86rem;">
+      Catatan: harga belum termasuk biaya pengiriman ke luar Baturaja, perubahan struktur, dan perizinan gedung.
+      <a href="/kontak/">Minta RAB rinci</a>.
+    </p>
+  </section>
+
+  {/* PORTFOLIO */}
+  {portfolio.length > 0 && (
+    <section class="container sections reveal">
+      <div class="section-head-flex">
+        <div>
+          <p class="eyebrow">Dokumentasi Proyek</p>
+          <h2>Pekerjaan Terbaru di Baturaja &amp; Sekitarnya</h2>
+        </div>
+        <a class="ghost-cta" href="/portfolio/">Semua Proyek</a>
+      </div>
+      <div class="card-grid">
+        {portfolio.map((post) => (
+          <PostCard
+            href={`/portfolio/${post.id}/`}
+            title={post.data.title}
+            description={post.data.description}
+            image={post.data.heroImage}
+            date={post.data.pubDate}
+            category="Portfolio"
+            tags={post.data.tags}
+            readingMinutes={readingTime(post.body)}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+  {/* AREA */}
+  <section class="container sections reveal">
+    <p class="eyebrow">Jangkauan Wilayah</p>
+    <h2>Melayani Baturaja hingga Koridor OKU Raya</h2>
+    <p>
+      Basis workshop di OKU Selatan membuat kami lebih dekat ke Muaradua dan Danau Ranau, sekaligus rutin melayani
+      Baturaja, OKU Timur, Muara Enim, dan Prabumulih.
+    </p>
+    <div class="card-grid" style="margin-top:22px;">
+      <a class="area-card" href="/">
+        <h3>Baturaja &amp; Kab. OKU</h3>
+        <p>Baturaja Timur, Baturaja Barat, Air Paoh, Sukaraya, Kemelak, Sekar Jaya, Tanjung Baru, dan sekitarnya.</p>
+        <span class="sidebar-more-link">Halaman utama →</span>
+      </a>
+      {AREAS.map((a) => (
+        <a class="area-card" href={`/area-layanan/${a.slug}/`}>
+          <h3>{a.name}</h3>
+          <p>{a.description}</p>
+          <span class="sidebar-more-link">Lihat area →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {/* PROSES */}
+  <section class="container sections reveal">
+    <p class="eyebrow">Alur Pemesanan</p>
+    <h2>Lima Langkah dari Konsultasi sampai Garansi</h2>
+    <ol class="steps">
+      <li><span class="step-num">1</span><div><strong>Konsultasi &amp; kirim ukuran</strong><em>Ceritakan kebutuhan dan kirim foto/ukuran kasar via WhatsApp. Kami beri estimasi awal.</em></div></li>
+      <li><span class="step-num">2</span><div><strong>Survei &amp; pengukuran</strong><em>Tim mengukur presisi, mengecek dinding, listrik, dan jalur pemasangan.</em></div></li>
+      <li><span class="step-num">3</span><div><strong>Desain 3D &amp; RAB</strong><em>Anda melihat visual, pilihan HPL, dan rincian biaya sebelum DP.</em></div></li>
+      <li><span class="step-num">4</span><div><strong>Produksi di workshop</strong><em>Modul dibuat dan diuji di Banding Agung, bukan di rumah Anda.</em></div></li>
+      <li><span class="step-num">5</span><div><strong>Instalasi &amp; serah terima</strong><em>Perakitan, penyetelan hardware, pembersihan, dan garansi tertulis.</em></div></li>
+    </ol>
+  </section>
+
+  {/* BLOG */}
+  {blog.length > 0 && (
+    <section class="container sections reveal">
+      <div class="section-head-flex">
+        <div>
+          <p class="eyebrow">Blog &amp; Panduan</p>
+          <h2>Bacaan Sebelum Memesan Interior</h2>
+        </div>
+        <a class="ghost-cta" href="/blog/">Semua Artikel</a>
+      </div>
+      <div class="card-grid">
+        {blog.map((post) => (
+          <PostCard
+            href={`/blog/${post.id}/`}
+            title={post.data.title}
+            description={post.data.description}
+            image={post.data.heroImage}
+            date={post.data.pubDate}
+            category="Blog"
+            tags={post.data.tags}
+            readingMinutes={readingTime(post.body)}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+  {/* FAQ */}
+  <section class="container faq reveal">
+    <p class="eyebrow">Pertanyaan Umum</p>
+    <h2>Hal yang Paling Sering Ditanyakan Klien</h2>
+    <div class="faq-list">
+      {homeFaqs.map((f) => (
+        <details>
+          <summary>{f.question}</summary>
+          <p>{f.answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand
+    title="Bangun Interior yang Tepat, Bukan Sekadar Murah"
+    text="Kirim ukuran ruangan dan target anggaran. Kami bantu pilih material, susun desain, dan hitung RAB yang masuk akal untuk kebutuhan Anda."
+    message="Halo Interior Baturaja, saya ingin konsultasi dan minta estimasi biaya interior di OKU Raya."
+    label="Mulai Konsultasi via WhatsApp"
+  />
+</BaseLayout>

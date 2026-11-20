@@ -1,0 +1,22 @@
+{
+  "name": "interior-baturaja",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "node scripts/generate-og.mjs && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "python3 /home/abah/.config/opencode/skills/cpanel-domainesia/scripts/deploy.py",
+    "deploy:dry": "python3 /home/abah/.config/opencode/skills/cpanel-domainesia/scripts/deploy.py --dry-run"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.9",
+    "@astrojs/sitemap": "^3.7.5",
+    "astro": "^7.4.12",
+    "sharp": "^0.35.5",
+    "unist-util-visit": "^5.2.0"
+  }
+}

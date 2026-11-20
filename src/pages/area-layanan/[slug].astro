@@ -1,0 +1,34 @@
+---
+import AreaLayout from '../../layouts/AreaLayout.astro';
+import { AREAS } from '../../data/areas';
+import { getPublishedPosts } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const AREA_TAG: Record<string, string> = {
+    'oku-selatan-muaradua-danau-ranau': 'OKU Selatan',
+    'oku-timur-martapura-belitang': 'OKU Timur',
+    'muara-enim-tanjung-enim': 'Muara Enim',
+    prabumulih: 'Prabumulih',
+  };
+
+  const posts = await getPublishedPosts();
+
+  return AREAS.map((area) => {
+    const tag = AREA_TAG[area.slug];
+    const related = posts
+      .filter((p) => p.data.tags.includes(tag))
+      .sort((a, b) => {
+        if (a.data.category !== b.data.category) {
+          return a.data.category === 'Portfolio' ? -1 : 1;
+        }
+        return (b.data.pubDate?.valueOf() ?? 0) - (a.data.pubDate?.valueOf() ?? 0);
+      })
+      .slice(0, 3);
+    return { params: { slug: area.slug }, props: { area, related } };
+  });
+}
+
+const { area, related } = Astro.props;
+---
+
+<AreaLayout area={area} related={related} />

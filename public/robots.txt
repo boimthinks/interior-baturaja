@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Tidak ada area admin pada situs statis ini
+Disallow: /_astro/
+
+# Sitemap
+Sitemap: https://interiorbaturaja.web.id/sitemap-index.xml
+
+# AI / LLM discovery (GEO)
+# llms-txt: https://interiorbaturaja.web.id/llms.txt
+# llms-full-txt: https://interiorbaturaja.web.id/llms-full.txt

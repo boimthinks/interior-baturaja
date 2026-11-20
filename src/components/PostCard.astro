@@ -1,0 +1,46 @@
+---
+import Visual from './Visual.astro';
+import { formatDate } from '../config/site';
+import { TAG_META } from '../config/tags';
+
+interface Props {
+  href: string;
+  title: string;
+  description?: string;
+  image?: string;
+  date?: Date;
+  category: 'Blog' | 'Portfolio';
+  tags?: string[];
+  readingMinutes?: number;
+  compact?: boolean;
+}
+
+const { href, title, description, image, date, category, tags = [], readingMinutes, compact = false } = Astro.props;
+---
+
+<a class="article-card" href={href}>
+  <Visual src={image} alt={title} ratio="4 / 3" label={category === 'Portfolio' ? 'Proyek' : 'Artikel'} />
+  <div class="article-card-body">
+    {compact && category === 'Portfolio' && (
+      <span class="post-cat">
+        {(tags.filter((t) => TAG_META[t]?.group === 'layanan')[0]) ?? 'Studi Proyek'}
+      </span>
+    )}
+    <h3>{title}</h3>
+    {description && <p>{description}</p>}
+    {!compact && tags.length > 0 && (
+      <div class="post-card-tags">
+        {tags
+          .filter((t) => TAG_META[t]?.group === 'layanan')
+          .slice(0, 3)
+          .map((t) => <span class="post-tag">{t}</span>)}
+      </div>
+    )}
+    {!compact && (
+      <div class="article-meta">
+        {date && <time datetime={date.toISOString()}>{formatDate(date)}</time>}
+        {readingMinutes && <span>{readingMinutes} menit baca</span>}
+      </div>
+    )}
+  </div>
+</a>

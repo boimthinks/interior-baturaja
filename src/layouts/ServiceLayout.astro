@@ -1,0 +1,325 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Visual from '../components/Visual.astro';
+import Icon from '../components/Icon.astro';
+import PostCard from '../components/PostCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { SITE, waLink } from '../config/site';
+import { SERVICES, type Service } from '../data/services';
+import { AREAS } from '../data/areas';
+import {
+  businessSchema,
+  organizationSchema,
+  websiteSchema,
+  serviceSchema,
+  breadcrumbSchema,
+  faqSchema,
+} from '../lib/schema';
+import { readingTime, type Post } from '../lib/content';
+
+interface Props {
+  service: Service;
+  related: Post[];
+}
+
+const { service, related } = Astro.props;
+const url = new URL(`/layanan/${service.slug}/`, SITE.domain).href;
+const waMessage = `Halo Interior Baturaja, saya ingin konsultasi ${service.shortTitle} di OKU Raya. Mohon info estimasi dan jadwal survei.`;
+
+const breadcrumbItems = [
+  { name: 'Layanan', url: new URL('/layanan/', SITE.domain).href },
+  { name: service.shortTitle, url },
+];
+
+const schemaGraph = [
+  businessSchema(),
+  organizationSchema(),
+  websiteSchema(),
+  serviceSchema(service, url),
+  breadcrumbSchema(breadcrumbItems),
+  faqSchema(service.faqs, url),
+];
+---
+
+<BaseLayout
+  title={service.title}
+  description={service.description}
+  keywords={service.keywords}
+  image={`/og/layanan-${service.slug}.png`}
+>
+  <JsonLd data={schemaGraph} />
+
+  <section class="hero hero-page">
+    <div class="container">
+      <Breadcrumbs items={breadcrumbItems.slice(0, -1)} />
+      <p class="eyebrow">{service.eyebrow}</p>
+      <h1>{service.h1}</h1>
+      <p class="lead">{service.description}</p>
+
+      <div class="service-hero-actions">
+        <a class="wa-cta" href={waLink(waMessage)} target="_blank" rel="noopener">
+          <Icon name="chat" size={17} /> Jadwalkan Survei Gratis
+        </a>
+        <a class="ghost-cta" href="#paket">Lihat Paket &amp; Harga</a>
+      </div>
+
+      <ul class="hero-badges">
+        <li><Icon name="check" size={15} /> Workshop sendiri</li>
+        <li><Icon name="check" size={15} /> Desain 3D &amp; RAB</li>
+        <li><Icon name="check" size={15} /> HPL / PVC anti rayap</li>
+        <li><Icon name="check" size={15} /> Garansi tertulis</li>
+      </ul>
+
+      <div class="service-hero-wrapper">
+        <Visual
+          src={`/images/${service.slug}.webp`}
+          alt={service.imageAlt}
+          class="service-hero-image"
+          eager={true}
+          label={service.shortTitle}
+        />
+      </div>
+    </div>
+  </section>
+
+  <div class="container service-container">
+    <div class="service-layout-grid">
+      <div class="service-main">
+        <section class="service-section">
+          <div class="service-intro-box">
+            <p class="eyebrow">Ringkasan Cepat</p>
+            <p class="service-intro-text">{service.intro}</p>
+            <blockquote>{service.quickAnswer}</blockquote>
+            <div class="service-intro-cta">
+              <a class="wa-cta" href={waLink(waMessage)} target="_blank" rel="noopener">
+                <Icon name="chat" size={17} /> Tanya Estimasi via WhatsApp
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section class="service-section" id="paket">
+          <p class="eyebrow">Paket Berjenjang</p>
+          <h2>Pilihan Paket {service.shortTitle}</h2>
+          <p class="muted">Harga acuan untuk area Baturaja. Biaya pengiriman dan akomodasi di luar Baturaja dihitung terpisah dan dicantumkan dalam RAB.</p>
+          <div class="package-grid">
+            {service.packages.map((pkg) => (
+              <article class:list={['package-card', { featured: pkg.highlight }]}>
+                {pkg.highlight && <span class="package-badge">Paling dipilih</span>}
+                <h3 class="package-name">{pkg.name}</h3>
+                <p class="package-tagline">{pkg.tagline}</p>
+                <div class="package-price">
+                  {pkg.price}
+                  <span class="package-unit">{pkg.unit}</span>
+                </div>
+                <ul class="package-list">
+                  {pkg.includes.map((item) => (
+                    <li><Icon name="check" size={17} /> <span>{item}</span></li>
+                  ))}
+                </ul>
+                <p class="package-best"><strong>Cocok untuk:</strong> {pkg.bestFor}</p>
+                <div style="margin-top:18px;">
+                  <a class="wa-cta" style="width:100%;text-align:center;padding:12px 18px;font-size:0.88rem;" href={waLink(`Halo, saya tertarik ${pkg.name} untuk ${service.shortTitle} di OKU Raya. Mohon info RAB-nya.`)} target="_blank" rel="noopener">
+                    Pilih Paket Ini
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="service-section" id="rab">
+          <p class="eyebrow">Simulasi RAB</p>
+          <h2>Tabel Estimasi Biaya {service.shortTitle}</h2>
+          <p>Angka berikut adalah acuan awal, bukan penawaran final. Harga dapat berubah setelah pengukuran, pemilihan motif HPL, dan pengecekan kondisi lokasi.</p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Item Pekerjaan</th><th>Spesifikasi</th><th>Satuan</th><th>Estimasi</th></tr>
+              </thead>
+              <tbody>
+                {service.priceTable.map((row) => (
+                  <tr>
+                    <td>{row.item}</td>
+                    <td>{row.spec}</td>
+                    <td>{row.unit}</td>
+                    <td class="price-cell">{row.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div class="info-box">
+            <h3>Cara membaca tabel ini</h3>
+            <ul>
+              <li>Harga belum termasuk perubahan struktur, penambahan titik listrik di luar rencana, dan biaya perizinan gedung.</li>
+              <li>Untuk area di luar Baturaja, biaya transportasi dan akomodasi tim dihitung berdasarkan jarak dan jumlah kunjungan.</li>
+              <li>RAB final memuat volume pekerjaan, merek hardware, motif HPL, dan jadwal pembayaran.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="service-section" id="spesifikasi">
+          <p class="eyebrow">Spesifikasi Teknis</p>
+          <h2>Material &amp; Hardware yang Kami Gunakan</h2>
+          <div class="spec-grid">
+            {service.specs.map((group) => (
+              <article class="spec-card">
+                <h3>{group.title}</h3>
+                <ul class="spec-list">
+                  {group.items.map((item) => (
+                    <li>
+                      <strong>{item.name}</strong>
+                      <span>{item.detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="service-section" id="lokasi">
+          <p class="eyebrow">Pertimbangan Lokasi</p>
+          <h2>Solusi untuk Karakter Bangunan di OKU Raya</h2>
+          <p>Setiap lokasi punya tantangan berbeda. Berikut pendekatan yang biasa kami gunakan berdasarkan pengalaman lapangan.</p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Lokasi / Tipe Bangunan</th><th>Tantangan</th><th>Pendekatan Kami</th></tr>
+              </thead>
+              <tbody>
+                {service.venues.map((v) => (
+                  <tr>
+                    <td>{v.venue}</td>
+                    <td>{v.challenge}</td>
+                    <td>{v.solution}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="service-section" id="proses">
+          <p class="eyebrow">SOP Pengerjaan</p>
+          <h2>Alur Kerja dari Survei hingga Serah Terima</h2>
+          <ol class="sop-list">
+            {service.process.map((step) => (
+              <li class="sop-item">
+                <h3>{step.title}</h3>
+                <p>{step.detail}</p>
+                <span class="sop-duration">Estimasi {step.duration}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section class="service-section" id="k3-izin">
+          <p class="eyebrow">K3 &amp; Perizinan</p>
+          <h2>Keselamatan Kerja dan Hal Administratif</h2>
+          <div class="info-box">
+            <h3>Penerapan K3 di Lokasi Klien</h3>
+            <ul>
+              {service.safety.map((s) => <li>{s}</li>)}
+            </ul>
+          </div>
+          <div class="permit-grid">
+            {service.permits.map((p) => (
+              <div class="permit-item">
+                <strong>{p.title}</strong>
+                <p>{p.detail}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section class="service-section" id="faq">
+          <p class="eyebrow">Tanya Jawab</p>
+          <h2>Pertanyaan Umum tentang {service.shortTitle}</h2>
+          <div class="faq-list">
+            {service.faqs.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {related.length > 0 && (
+          <section class="service-section" id="artikel">
+            <p class="eyebrow">Artikel Penunjang</p>
+            <h2>Bacaan terkait {service.shortTitle}</h2>
+            <div class="card-grid">
+              {related.map((post) => (
+                <PostCard
+                  href={`/${post.data.category === 'Portfolio' ? 'portfolio' : 'blog'}/${post.id}/`}
+                  title={post.data.title}
+                  description={post.data.description}
+                  image={post.data.heroImage}
+                  date={post.data.pubDate}
+                  category={post.data.category}
+                  tags={post.data.tags}
+                  readingMinutes={readingTime(post.body)}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-widget sidebar-cta-widget">
+          <span class="sidebar-badge">Mulai dari</span>
+          <h3 class="sidebar-widget-title">{service.priceFrom}</h3>
+          <p class="sidebar-widget-subtitle">{service.priceUnit}</p>
+          <p class="sidebar-widget-desc">Harga final tergantung ukuran, material, dan aksesori. Survei lokasi gratis untuk area Baturaja.</p>
+          <a class="wa-cta sidebar-wa-btn" href={waLink(waMessage)} target="_blank" rel="noopener">Chat WhatsApp</a>
+          <ul class="sidebar-trust-list">
+            <li>✓ Workshop sendiri di Banding Agung</li>
+            <li>✓ Desain 3D sebelum produksi</li>
+            <li>✓ Material multipleks/PVC + HPL</li>
+            <li>✓ Garansi konstruksi &amp; hardware</li>
+          </ul>
+          <div class="sidebar-contact-box">
+            <p><strong>Workshop:</strong> {SITE.workshop.street}, {SITE.workshop.district}</p>
+            <p><strong>WhatsApp:</strong> {SITE.phoneDisplay}</p>
+            <p><strong>Jam:</strong> Senin–Sabtu 08.00–17.00 WIB</p>
+          </div>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3 class="sidebar-widget-title">Layanan Lain</h3>
+          <ul class="sidebar-services-list">
+            {SERVICES.map((s) => (
+              <li>
+                <a class:list={['sidebar-service-item', { active: s.slug === service.slug }]} href={`/layanan/${s.slug}/`}>
+                  <span>{s.shortTitle}</span><span aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3 class="sidebar-widget-title">Area Layanan</h3>
+          <ul class="sidebar-services-list">
+            <li><a class="sidebar-service-item" href="/"><span>Baturaja &amp; OKU</span><span aria-hidden="true">→</span></a></li>
+            {AREAS.map((a) => (
+              <li><a class="sidebar-service-item" href={`/area-layanan/${a.slug}/`}><span>{a.shortName}</span><span aria-hidden="true">→</span></a></li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <CtaBand
+    title={`Siap Membuat ${service.shortTitle} di Baturaja atau OKU Raya?`}
+    message={waMessage}
+    label="Konsultasi &amp; Minta RAB via WhatsApp"
+  />
+</BaseLayout>

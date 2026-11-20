@@ -1,0 +1,133 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PostCard from '../../components/PostCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE } from '../../config/site';
+import { SERVICE_TAGS } from '../../config/tags';
+import { readingTime } from '../../lib/content';
+import { businessSchema, organizationSchema, websiteSchema, breadcrumbSchema, itemListSchema } from '../../lib/schema';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft && data.category === 'Blog')).sort(
+  (a, b) => (b.data.pubDate?.valueOf() ?? 0) - (a.data.pubDate?.valueOf() ?? 0)
+);
+const url = new URL('/blog/', SITE.domain).href;
+const breadcrumbItems = [{ name: 'Blog', url }];
+const schema = [
+  businessSchema(),
+  organizationSchema(),
+  websiteSchema(),
+  breadcrumbSchema(breadcrumbItems),
+  ...(posts.length
+    ? [itemListSchema(posts.map((p) => ({ name: p.data.title, url: new URL(`/blog/${p.id}/`, SITE.domain).href })), url)]
+    : []),
+];
+
+---
+
+<BaseLayout
+  title="Blog & Panduan Interior Baturaja"
+  description="Artikel harga, material, desain, dan studi kasus interior di Baturaja, OKU Selatan, OKU Timur, Muara Enim, dan Prabumulih. Ditulis dari pengalaman workshop."
+  keywords={['blog interior baturaja', 'harga interior baturaja', 'tips kitchen set OKU', 'material HPL vs PVC']}
+  image="/og/blog-index.png"
+>
+  <JsonLd data={schema} />
+
+  <section class="hero hero-page">
+    <div class="container">
+      <Breadcrumbs items={[]} />
+      <p class="eyebrow">Blog &amp; Edukasi</p>
+      <h1>Panduan Interior Baturaja &amp; OKU Raya</h1>
+      <p class="lead">
+        Harga, material, desain, dan pengalaman lapangan dari workshop kami. Dibuat untuk membantu Anda memutuskan
+        sebelum memesan kitchen set, lemari, backdrop TV, interior kantor, atau fit-out toko.
+      </p>
+      <ul class="hero-badges">
+        <li><Icon name="ruler" size={15} /> Berbasis pengalaman proyek</li>
+        <li><Icon name="check" size={15} /> Tanpa klaim berlebihan</li>
+        <li><Icon name="pin" size={15} /> Konteks lokal Sumatera Selatan</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="container sections">
+    <div class="filter-bar" data-filter-root>
+      <span class="filter-label">Filter topik layanan</span>
+      <div class="chip-row">
+        <button class="chip active" data-filter="all" aria-pressed="true">Semua</button>
+        {SERVICE_TAGS.map((t) => (
+          <button class="chip" data-filter={t.key} aria-pressed="false">{t.label}</button>
+        ))}
+      </div>
+    </div>
+
+    <p class="post-count" data-post-count>{posts.length} artikel</p>
+
+    <div class="card-grid" data-post-grid>
+      {posts.map((post) => (
+        <div data-post-item data-tags={post.data.tags.join('|')}>
+          <PostCard
+            href={`/blog/${post.id}/`}
+            title={post.data.title}
+            description={post.data.description}
+            image={post.data.heroImage}
+            date={post.data.pubDate}
+            category="Blog"
+            tags={post.data.tags}
+            readingMinutes={readingTime(post.body)}
+          />
+        </div>
+      ))}
+    </div>
+
+    {posts.length === 0 && <p class="muted">Belum ada artikel yang terbit.</p>}
+  </section>
+
+  <CtaBand
+    title="Punya Pertanyaan yang Belum Terjawab?"
+    text="Kirim ukuran ruangan dan foto lokasi via WhatsApp. Kami bantu hitung kebutuhan material dan estimasi biaya tanpa kewajiban memesan."
+    message="Halo Interior Baturaja, saya punya pertanyaan tentang interior di OKU Raya."
+  />
+</BaseLayout>
+
+<script is:inline data-astro-rerun>
+  (function () {
+    var root = document.querySelector('[data-filter-root]');
+    if (!root) return;
+    var chips = root.querySelectorAll('[data-filter]');
+    var items = document.querySelectorAll('[data-post-item]');
+    var counter = document.querySelector('[data-post-count]');
+    var active = 'all';
+
+    function apply() {
+      var visible = 0;
+      items.forEach(function (item) {
+        var tags = (item.getAttribute('data-tags') || '').split('|');
+        var show = active === 'all' || tags.indexOf(active) !== -1;
+        item.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      if (counter) counter.textContent = visible + ' artikel';
+    }
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
+        chip.classList.add('active');
+        chip.setAttribute('aria-pressed', 'true');
+        active = chip.getAttribute('data-filter') || 'all';
+        apply();
+      });
+    });
+
+    var params = new URLSearchParams(window.location.search);
+    var initial = params.get('tag');
+    if (initial) {
+      var found = Array.prototype.find.call(chips, function (c) { return c.getAttribute('data-filter') === initial; });
+      if (found) found.click();
+    }
+  })();
+</script>

@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Halaman Tidak Ditemukan" description="Halaman yang Anda cari tidak tersedia." noindex={true}>
+  <section class="center-page">
+    <p class="eyebrow">404</p>
+    <h1>Halaman Tidak Ditemukan</h1>
+    <p class="lead" style="margin:0 auto 26px;">
+      Alamat yang Anda buka mungkin sudah berubah atau salah ketik. Silakan kembali ke beranda, melihat layanan, atau
+      menghubungi kami langsung.
+    </p>
+    <p style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a class="wa-cta" href="/">Kembali ke Beranda</a>
+      <a class="ghost-cta" href="/layanan/">Lihat Layanan</a>
+    </p>
+  </section>
+</BaseLayout>

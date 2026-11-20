@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import PostCard from '../../components/PostCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE } from '../../config/site';
+import { SERVICE_TAGS } from '../../config/tags';
+import { readingTime } from '../../lib/content';
+import { businessSchema, organizationSchema, websiteSchema, breadcrumbSchema, itemListSchema } from '../../lib/schema';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft && data.category === 'Portfolio')).sort(
+  (a, b) => (b.data.pubDate?.valueOf() ?? 0) - (a.data.pubDate?.valueOf() ?? 0)
+);
+
+const url = new URL('/portfolio/', SITE.domain).href;
+const schema = [
+  businessSchema(),
+  organizationSchema(),
+  websiteSchema(),
+  breadcrumbSchema([{ name: 'Portofolio', url }]),
+  itemListSchema(
+    posts.map((p) => ({ name: p.data.title, url: new URL(`/portfolio/${p.id}/`, SITE.domain).href })),
+    url
+  ),
+];
+
+const locations = new Set(posts.map((p) => p.data.projectDetails?.location).filter(Boolean));
+---
+
+<BaseLayout
+  title="Portofolio Proyek Interior Baturaja & OKU Raya"
+  description="Dokumentasi proyek interior kami di Baturaja, OKU Selatan, OKU Timur, Muara Enim, dan Prabumulih: kitchen set, lemari custom, backdrop TV, kantor, toko, dan booth pameran."
+  keywords={['portofolio interior baturaja', 'proyek kitchen set OKU', 'hasil interior baturaja']}
+  image="/og/portfolio-index.png"
+>
+  <JsonLd data={schema} />
+
+  <section class="hero hero-page">
+    <div class="container">
+      <Breadcrumbs items={[]} />
+      <p class="eyebrow">Studi Proyek</p>
+      <h1>Portofolio Interior Baturaja &amp; OKU Raya</h1>
+      <p class="lead">
+        Setiap proyek punya kendala lokasi yang berbeda: dinding tidak rata, dapur lembap, ruang sempit, atau jadwal
+        instalasi malam di mall. Berikut dokumentasi pekerjaan yang sudah kami selesaikan.
+      </p>
+      <ul class="hero-badges">
+        <li><Icon name="home" size={15} /> {posts.length} proyek terdokumentasi</li>
+        <li><Icon name="pin" size={15} /> {locations.size} lokasi</li>
+        <li><Icon name="tools" size={15} /> Workshop sendiri</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="container sections">
+    <div class="filter-bar" data-filter-root>
+      <span class="filter-label">Filter jenis proyek</span>
+      <div class="chip-row">
+        <button class="chip active" data-filter="all" aria-pressed="true">Semua</button>
+        {SERVICE_TAGS.map((t) => (
+          <button class="chip" data-filter={t.key} aria-pressed="false">{t.label}</button>
+        ))}
+      </div>
+    </div>
+
+    <p class="post-count" data-post-count>{posts.length} proyek</p>
+
+    <div class="card-grid" data-post-grid>
+      {posts.map((post) => (
+        <div data-post-item data-tags={post.data.tags.join('|')}>
+          <PostCard
+            href={`/portfolio/${post.id}/`}
+            title={post.data.title}
+            image={post.data.heroImage}
+            category="Portfolio"
+            tags={post.data.tags}
+            compact={true}
+          />
+        </div>
+      ))}
+    </div>
+
+    {posts.length === 0 && <p class="muted">Belum ada proyek yang dipublikasikan.</p>}
+  </section>
+
+  <CtaBand
+    title="Ingin Proyek Anda Menjadi Studi Kasus Berikutnya?"
+    text="Ceritakan ukuran ruangan, lokasi, dan target anggaran. Kami akan memberi gambaran material dan tahapan pengerjaan yang paling masuk akal."
+    message="Halo Interior Baturaja, saya ingin konsultasi proyek interior seperti di portofolio."
+  />
+</BaseLayout>
+
+<script is:inline data-astro-rerun>
+  (function () {
+    var root = document.querySelector('[data-filter-root]');
+    if (!root) return;
+    var chips = root.querySelectorAll('[data-filter]');
+    var items = document.querySelectorAll('[data-post-item]');
+    var counter = document.querySelector('[data-post-count]');
+    var active = 'all';
+
+    function apply() {
+      var visible = 0;
+      items.forEach(function (item) {
+        var tags = (item.getAttribute('data-tags') || '').split('|');
+        var show = active === 'all' || tags.indexOf(active) !== -1;
+        item.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      if (counter) counter.textContent = visible + ' proyek';
+    }
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
+        chip.classList.add('active');
+        chip.setAttribute('aria-pressed', 'true');
+        active = chip.getAttribute('data-filter') || 'all';
+        apply();
+      });
+    });
+  })();
+</script>

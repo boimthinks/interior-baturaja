@@ -1,0 +1,60 @@
+---
+import { SITE, waLink } from '../config/site';
+import GoogleSourcePreferences from './GoogleSourcePreferences.astro';
+import { SERVICES } from '../data/services';
+import { AREAS } from '../data/areas';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h3><a href="/" style="color: inherit; text-decoration: none;">{SITE.name}</a></h3>
+      <p>{SITE.tagline}</p>
+      <p class="muted">{SITE.description}</p>
+      <GoogleSourcePreferences label="Ikuti Interior Baturaja di Google Search" />
+    </div>
+
+    <div>
+      <h4>Layanan</h4>
+      <ul class="footer-list">
+        {SERVICES.map((s) => (
+          <li><a href={`/layanan/${s.slug}/`}>{s.shortTitle}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h4>Area Layanan</h4>
+      <ul class="footer-list">
+        <li><a href="/">Baturaja &amp; Kab. OKU</a></li>
+        {AREAS.map((a) => (
+          <li><a href={`/area-layanan/${a.slug}/`}>{a.name}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h4>Kontak &amp; Workshop</h4>
+      <ul class="footer-list footer-contact">
+        <li><strong>WhatsApp:</strong> <a href={waLink()} target="_blank" rel="noopener">{SITE.phoneDisplay}</a></li>
+        <li><strong>Email:</strong> <a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+        <li><strong>Workshop:</strong> {SITE.workshop.street}, {SITE.workshop.district}, {SITE.workshop.city}, {SITE.workshop.province} {SITE.workshop.postalCode}</li>
+        <li><strong>Jam:</strong> {SITE.openingHoursText}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© {year} {SITE.name}. Hak cipta dilindungi. Pengerjaan bergaransi.</p>
+    <p class="muted">
+      Jasa interior Baturaja, kitchen set, lemari custom, backdrop TV, partisi, interior kantor dinas, fit-out toko,
+      tenant mall, dan booth pameran di OKU Raya.
+    </p>
+    <p class="muted footer-legal">
+      <a href="/tentang-kami/">Tentang Kami</a> · <a href="/kontak/">Kontak</a> ·
+      <a href="/llms.txt">llms.txt</a> · <a href="/sitemap-index.xml">Sitemap</a>
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,247 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Icon from '../components/Icon.astro';
+import PostCard from '../components/PostCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { SITE, waLink } from '../config/site';
+import { SERVICES } from '../data/services';
+import { AREAS, type Area } from '../data/areas';
+import {
+  businessSchema,
+  organizationSchema,
+  websiteSchema,
+  areaServiceSchema,
+  breadcrumbSchema,
+  faqSchema,
+} from '../lib/schema';
+import { readingTime, type Post } from '../lib/content';
+
+interface Props {
+  area: Area;
+  related: Post[];
+}
+
+const { area, related } = Astro.props;
+const url = new URL(`/area-layanan/${area.slug}/`, SITE.domain).href;
+const waMessage = `Halo Interior Baturaja, saya ingin konsultasi interior untuk area ${area.name}. Mohon info survei dan estimasi.`;
+
+const breadcrumbItems = [
+  { name: 'Area Layanan', url: new URL('/area-layanan/', SITE.domain).href },
+  { name: area.name, url },
+];
+
+const schemaGraph = [
+  businessSchema(),
+  organizationSchema(),
+  websiteSchema(),
+  areaServiceSchema(area, url),
+  breadcrumbSchema(breadcrumbItems),
+  faqSchema(area.faqs, url),
+];
+
+const focusServices = area.serviceFocus
+  .map((f) => ({ ...f, service: SERVICES.find((s) => s.slug === f.slug) }))
+  .filter((f) => f.service);
+---
+
+<BaseLayout
+  title={area.title}
+  description={area.description}
+  keywords={area.keywords}
+  image={`/og/area-${area.slug}.png`}
+>
+  <JsonLd data={schemaGraph} />
+
+  <section class="hero hero-page">
+    <div class="container">
+      <Breadcrumbs items={breadcrumbItems.slice(0, -1)} />
+      <p class="eyebrow">{area.eyebrow}</p>
+      <h1>{area.h1}</h1>
+      <p class="lead">{area.description}</p>
+      <div class="service-hero-actions">
+        <a class="wa-cta" href={waLink(waMessage)} target="_blank" rel="noopener">
+          <Icon name="chat" size={17} /> Konsultasi Area {area.shortName}
+        </a>
+        <a class="ghost-cta" href="#layanan-area">Lihat Layanan</a>
+      </div>
+      <ul class="hero-badges">
+        <li><Icon name="pin" size={15} /> {area.districts[0]} &amp; sekitar</li>
+        <li><Icon name="truck" size={15} /> Armada sendiri</li>
+        <li><Icon name="tools" size={15} /> Workshop di OKU Selatan</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="container service-container">
+    <div class="service-layout-grid">
+      <div class="service-main">
+        <section class="service-section">
+          <div class="service-intro-box">
+            <p class="eyebrow">Ringkasan Cepat</p>
+            <p class="service-intro-text">{area.intro}</p>
+            <blockquote>{area.quickAnswer}</blockquote>
+            <div class="service-intro-cta">
+              <a class="wa-cta" href={waLink(waMessage)} target="_blank" rel="noopener">
+                <Icon name="chat" size={17} /> Jadwalkan Survei di {area.shortName}
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section class="service-section">
+          <p class="eyebrow">Wilayah Jangkauan</p>
+          <h2>Kecamatan &amp; Kawasan yang Kami Layani</h2>
+          <p>{area.marketProfile}</p>
+          <ul class="hero-badges" style="margin-top:18px;">
+            {area.districts.map((d) => <li><Icon name="pin" size={14} /> {d}</li>)}
+          </ul>
+          <p class="muted" style="font-size:0.86rem;margin-top:14px;">
+            Landmark sekitar: {area.landmarks.join(' · ')}
+          </p>
+        </section>
+
+        <section class="service-section">
+          <p class="eyebrow">Keunggulan Lokal</p>
+          <h2>Mengapa Memilih Kami di {area.shortName}?</h2>
+          <div class="why-grid">
+            {area.highlights.map((h, i) => (
+              <article class="feature">
+                <span class="feature-num">0{i + 1}</span>
+                <h3>{h.title}</h3>
+                <p>{h.detail}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="service-section" id="layanan-area">
+          <p class="eyebrow">Layanan yang Paling Dibutuhkan</p>
+          <h2>Layanan Interior untuk {area.name}</h2>
+          <div class="card-grid">
+            {focusServices.map((f) => (
+              <a class="area-card" href={`/layanan/${f.service!.slug}/`}>
+                <h3>{f.service!.shortTitle}</h3>
+                <p>{f.reason}</p>
+                <span class="sidebar-more-link">Lihat layanan →</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section class="service-section">
+          <p class="eyebrow">Logistik &amp; Jadwal</p>
+          <h2>Jarak Tempuh dan Rencana Kunjungan</h2>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Rute</th><th>Jarak</th><th>Catatan</th></tr>
+              </thead>
+              <tbody>
+                {area.logistics.map((l) => (
+                  <tr>
+                    <td>{l.from}</td>
+                    <td class="price-cell">{l.distance}</td>
+                    <td>{l.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div class="info-box">
+            <h3>Catatan lapangan</h3>
+            <ul>
+              {area.localNotes.map((n) => (
+                <li><strong>{n.title}:</strong> {n.detail}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section class="service-section" id="faq">
+          <p class="eyebrow">Tanya Jawab</p>
+          <h2>Pertanyaan Seputar Layanan di {area.shortName}</h2>
+          <div class="faq-list">
+            {area.faqs.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {related.length > 0 && (
+          <section class="service-section">
+            <p class="eyebrow">Proyek &amp; Artikel Terkait</p>
+            <h2>Dokumentasi dan Bacaan untuk {area.shortName}</h2>
+            <div class="card-grid">
+              {related.map((post) => (
+                <PostCard
+                  href={`/${post.data.category === 'Portfolio' ? 'portfolio' : 'blog'}/${post.id}/`}
+                  title={post.data.title}
+                  description={post.data.description}
+                  image={post.data.heroImage}
+                  date={post.data.pubDate}
+                  category={post.data.category}
+                  tags={post.data.tags}
+                  readingMinutes={readingTime(post.body)}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-widget sidebar-cta-widget">
+          <span class="sidebar-badge">Area {area.shortName}</span>
+          <h3 class="sidebar-widget-title">Butuh Interior di {area.name}?</h3>
+          <p class="sidebar-widget-desc">{area.quickAnswer}</p>
+          <a class="wa-cta sidebar-wa-btn" href={waLink(waMessage)} target="_blank" rel="noopener">Chat WhatsApp</a>
+          <ul class="sidebar-trust-list">
+            <li>✓ Survei &amp; pengukuran lokasi</li>
+            <li>✓ Produksi modular di workshop</li>
+            <li>✓ Pengiriman armada sendiri</li>
+            <li>✓ Garansi tertulis</li>
+          </ul>
+          <div class="sidebar-contact-box">
+            <p><strong>Workshop:</strong> {SITE.workshop.street}, {SITE.workshop.district}</p>
+            <p><strong>WhatsApp:</strong> {SITE.phoneDisplay}</p>
+          </div>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3 class="sidebar-widget-title">Area Lain</h3>
+          <ul class="sidebar-services-list">
+            <li><a class="sidebar-service-item" href="/"><span>Baturaja &amp; OKU</span><span aria-hidden="true">→</span></a></li>
+            {AREAS.map((a) => (
+              <li>
+                <a class:list={['sidebar-service-item', { active: a.slug === area.slug }]} href={`/area-layanan/${a.slug}/`}>
+                  <span>{a.shortName}</span><span aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3 class="sidebar-widget-title">Layanan Kami</h3>
+          <ul class="sidebar-services-list">
+            {SERVICES.map((s) => (
+              <li><a class="sidebar-service-item" href={`/layanan/${s.slug}/`}><span>{s.shortTitle}</span><span aria-hidden="true">→</span></a></li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <CtaBand
+    title={`Wujudkan Interior Impian di ${area.name}`}
+    text={`Tim kami siap survei ke ${area.districts.slice(0, 3).join(', ')}, dan sekitarnya. Dapatkan estimasi awal dan jadwal produksi yang jelas.`}
+    message={waMessage}
+    label="Konsultasi Area Ini via WhatsApp"
+  />
+</BaseLayout>

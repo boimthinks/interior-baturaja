@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Ilustrasi interior custom: kitchen set, lemari, dan panel dinding">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1733"/>
+      <stop offset="0.55" stop-color="#14294f"/>
+      <stop offset="1" stop-color="#3a2f24"/>
+    </linearGradient>
+    <linearGradient id="cab" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8dfcf"/>
+      <stop offset="1" stop-color="#c9bca7"/>
+    </linearGradient>
+    <linearGradient id="cabDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f4a5c"/>
+      <stop offset="1" stop-color="#26303f"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e6c78a"/>
+      <stop offset="1" stop-color="#b89150"/>
+    </linearGradient>
+    <linearGradient id="counter" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f4efe6"/>
+      <stop offset="0.5" stop-color="#d9d2c4"/>
+      <stop offset="1" stop-color="#b9b0a0"/>
+    </linearGradient>
+    <radialGradient id="lamp" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffd9a0" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="window" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8fb3c9"/>
+      <stop offset="0.6" stop-color="#557a8f"/>
+      <stop offset="1" stop-color="#2c4a5c"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+
+  <!-- garis perspektif ruang -->
+  <g opacity="0.18" stroke="#cfe0ff" stroke-width="2">
+    <path d="M0 760 L1600 700"/>
+    <path d="M0 620 L1600 580"/>
+    <path d="M1120 0 L980 1000"/>
+    <path d="M1240 0 L1180 1000"/>
+  </g>
+
+  <!-- panel dinding kiri -->
+  <g opacity="0.95">
+    <rect x="0" y="120" width="330" height="640" fill="#1b2c4d"/>
+    <g stroke="#2c4269" stroke-width="6">
+      <path d="M40 140 V740"/><path d="M80 140 V740"/><path d="M120 140 V740"/>
+      <path d="M160 140 V740"/><path d="M200 140 V740"/><path d="M240 140 V740"/>
+      <path d="M280 140 V740"/>
+    </g>
+  </g>
+
+  <!-- jendela / pemandangan danau -->
+  <g>
+    <rect x="1050" y="150" width="470" height="390" rx="10" fill="url(#window)"/>
+    <path d="M1050 420 L1160 330 L1250 390 L1350 300 L1450 370 L1520 320 L1520 540 L1050 540 Z" fill="#24445a" opacity="0.85"/>
+    <path d="M1050 470 Q1200 430 1520 480 L1520 540 L1050 540 Z" fill="#1b3548"/>
+    <g stroke="#d8e7f0" stroke-width="5" opacity="0.35">
+      <path d="M1050 200 H1520"/><path d="M1050 500 H1520"/>
+    </g>
+  </g>
+
+  <!-- kabinet atas -->
+  <g>
+    <rect x="560" y="170" width="430" height="190" rx="6" fill="url(#cab)"/>
+    <g stroke="#a99b85" stroke-width="4">
+      <path d="M560 265 H990"/><path d="M703 170 V360"/><path d="M853 170 V360"/>
+    </g>
+    <rect x="585" y="300" width="70" height="8" rx="4" fill="#6f6455"/>
+    <rect x="730" y="300" width="70" height="8" rx="4" fill="#6f6455"/>
+    <rect x="880" y="300" width="70" height="8" rx="4" fill="#6f6455"/>
+  </g>
+
+  <!-- kitchen island / counter -->
+  <g>
+    <rect x="470" y="540" width="620" height="300" rx="8" fill="url(#cabDark)"/>
+    <rect x="450" y="512" width="660" height="40" rx="8" fill="url(#counter)"/>
+    <g stroke="#1a2331" stroke-width="4">
+      <path d="M560 552 V840"/><path d="M680 552 V840"/><path d="M800 552 V840"/><path d="M920 552 V840"/>
+    </g>
+    <rect x="580" y="600" width="60" height="6" rx="3" fill="#b89150"/>
+    <rect x="700" y="600" width="60" height="6" rx="3" fill="#b89150"/>
+    <rect x="820" y="600" width="60" height="6" rx="3" fill="#b89150"/>
+    <rect x="865" y="470" width="90" height="42" rx="8" fill="#8e9296"/>
+    <rect x="600" y="470" width="120" height="42" rx="8" fill="#6f7478"/>
+  </g>
+
+  <!-- lampu gantung -->
+  <g>
+    <circle cx="760" cy="118" r="90" fill="url(#lamp)" opacity="0.7"/>
+    <path d="M760 0 V70" stroke="#b89150" stroke-width="3"/>
+    <path d="M730 70 H790 L775 100 H745 Z" fill="url(#gold)"/>
+    <circle cx="900" cy="138" r="70" fill="url(#lamp)" opacity="0.5"/>
+    <path d="M900 0 V96" stroke="#b89150" stroke-width="3"/>
+    <path d="M878 96 H922 L912 118 H888 Z" fill="url(#gold)"/>
+  </g>
+
+  <!-- tanaman & detail -->
+  <g opacity="0.9">
+    <rect x="250" y="760" width="90" height="80" rx="8" fill="#3f3a33"/>
+    <path d="M295 760 C270 690 250 660 225 640 M295 760 C310 680 340 650 365 630 M295 760 C300 690 300 650 300 610" stroke="#5c7a52" stroke-width="10" stroke-linecap="round" fill="none"/>
+    <path d="M225 640 C200 620 195 590 210 575 C230 590 240 615 225 640 Z" fill="#6f9161"/>
+    <path d="M365 630 C390 615 400 585 388 568 C366 585 355 608 365 630 Z" fill="#6f9161"/>
+    <path d="M300 610 C285 585 292 556 312 545 C325 568 320 592 300 610 Z" fill="#7fa36e"/>
+  </g>
+
+  <!-- lantai -->
+  <path d="M0 1000 V840 L1600 760 V1000 Z" fill="#1a2233"/>
+  <g stroke="#2c3a52" stroke-width="2" opacity="0.6">
+    <path d="M0 880 L1600 800"/><path d="M0 930 L1600 860"/><path d="M0 980 L1600 920"/>
+  </g>
+</svg>

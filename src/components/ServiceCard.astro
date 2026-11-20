@@ -1,0 +1,22 @@
+---
+import Visual from './Visual.astro';
+
+interface Props {
+  href: string;
+  title: string;
+  shortTitle: string;
+  description: string;
+  image?: string;
+}
+
+const { href, title, shortTitle, description, image } = Astro.props;
+---
+
+<a class="service-card" href={href}>
+  <Visual src={image} alt={title} ratio="4 / 3" label={shortTitle} />
+  <div class="service-card-body">
+    <h3 class="service-card-short-title">{shortTitle}</h3>
+    <p class="service-card-long-title">{title}</p>
+    <p class="service-card-description">{description}</p>
+  </div>
+</a>

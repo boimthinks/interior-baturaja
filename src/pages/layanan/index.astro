@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE } from '../../config/site';
+import { SERVICES } from '../../data/services';
+import { businessSchema, organizationSchema, websiteSchema, breadcrumbSchema, itemListSchema } from '../../lib/schema';
+
+const url = new URL('/layanan/', SITE.domain).href;
+const schema = [
+  businessSchema(),
+  organizationSchema(),
+  websiteSchema(),
+  breadcrumbSchema([{ name: 'Layanan', url }]),
+  itemListSchema(
+    SERVICES.map((s) => ({ name: s.shortTitle, url: new URL(`/layanan/${s.slug}/`, SITE.domain).href })),
+    url
+  ),
+];
+---
+
+<BaseLayout
+  title="Layanan Interior & Fit-Out Baturaja OKU Raya"
+  description="Katalog layanan Interior Baturaja: kitchen set, lemari custom & kamar set, backdrop TV & partisi, interior kantor dinas, serta fit-out toko, tenant mall, dan booth pameran."
+  keywords={[
+    'layanan interior baturaja',
+    'jasa pembuatan interior OKU',
+    'kontraktor fit out baturaja',
+    'harga kitchen set baturaja',
+  ]}
+  image="/og/layanan-index.png"
+>
+  <JsonLd data={schema} />
+
+  <section class="hero hero-page">
+    <div class="container">
+      <Breadcrumbs items={[]} />
+      <p class="eyebrow">Katalog Layanan</p>
+      <h1>Layanan Interior, Furniture Custom &amp; Fit-Out Komersial</h1>
+      <p class="lead">
+        Lima pilar layanan untuk kebutuhan rumah, kantor, dan usaha di Baturaja dan seluruh OKU Raya. Semua dikerjakan
+        oleh tim workshop sendiri dengan material yang jelas dan RAB transparan.
+      </p>
+      <ul class="hero-badges">
+        <li><Icon name="tools" size={15} /> Workshop Banding Agung</li>
+        <li><Icon name="ruler" size={15} /> Desain 3D</li>
+        <li><Icon name="shield" size={15} /> Garansi tertulis</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="container sections reveal">
+    <div class="card-grid">
+      {SERVICES.map((s) => (
+        <ServiceCard
+          href={`/layanan/${s.slug}/`}
+          title={s.title}
+          shortTitle={s.shortTitle}
+          description={s.description}
+          image={`/images/${s.slug}.webp`}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section class="container sections reveal">
+    <p class="eyebrow">Perbandingan Material</p>
+    <h2>Multipleks, PVC Board, atau Blockboard?</h2>
+    <p>
+      Pemilihan material menentukan umur pakai furnitur, terutama di iklim panas dan lembap Sumatera Selatan. Tabel
+      berikut merangkum perbedaan utama yang kami temui di lapangan.
+    </p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Material</th><th>Kekuatan</th><th>Ketahanan Air</th><th>Anti Rayap</th><th>Cocok untuk</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Multipleks 18mm</td>
+            <td>Sangat baik, sekrup kuat</td>
+            <td>Sedang (perlu pelapis)</td>
+            <td>Tidak mutlak</td>
+            <td>Kabinet utama, lemari, meja</td>
+          </tr>
+          <tr>
+            <td>PVC Board 18mm</td>
+            <td>Baik, ringan</td>
+            <td>Sangat baik</td>
+            <td>Ya, 100%</td>
+            <td>Dapur lembap, area dekat air</td>
+          </tr>
+          <tr>
+            <td>Blockboard</td>
+            <td>Baik, ringan</td>
+            <td>Rendah</td>
+            <td>Rentan</td>
+            <td>Pintu, panel lebar</td>
+          </tr>
+          <tr>
+            <td>Particle board / MDF</td>
+            <td>Rendah–sedang</td>
+            <td>Rendah</td>
+            <td>Rentan</td>
+            <td>Furnitur ekonomis jangka pendek</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="info-box">
+      <h3>Rekomendasi singkat</h3>
+      <ul>
+        <li>Rumah kering dengan ventilasi baik: multipleks 18mm + HPL sudah cukup awet.</li>
+        <li>Dapur dekat kamar mandi atau area Danau Ranau: gunakan PVC board untuk kabinet bawah.</li>
+        <li>Hindari particle board untuk kabinet yang menahan beban berat atau sering terkena air.</li>
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Belum Yakin Memilih Layanan atau Material?"
+    text="Kirim foto ruangan dan ukuran kasar. Kami bantu menentukan jenis pekerjaan, material, dan urutan pengerjaan yang paling efisien."
+  />
+</BaseLayout>

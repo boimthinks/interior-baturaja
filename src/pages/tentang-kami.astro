@@ -1,0 +1,204 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import JsonLd from '../components/JsonLd.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, waLink } from '../config/site';
+import { SERVICES } from '../data/services';
+import { AREAS } from '../data/areas';
+import { businessSchema, organizationSchema, websiteSchema, breadcrumbSchema } from '../lib/schema';
+
+const url = new URL('/tentang-kami/', SITE.domain).href;
+const breadcrumbItems = [{ name: 'Tentang Kami', url }];
+
+const aboutSchema = {
+  '@type': 'AboutPage',
+  '@id': `${url}#aboutpage`,
+  url,
+  name: 'Tentang Interior Baturaja',
+  description:
+    'Profil workshop Interior Baturaja di Banding Agung, OKU Selatan: tim, proses produksi, material, dan komitmen garansi.',
+  isPartOf: { '@id': SITE.domain + '/#website' },
+  about: { '@id': SITE.domain + '/#business' },
+  mainEntity: { '@id': SITE.domain + '/#business' },
+  inLanguage: 'id-ID',
+};
+
+const business = {
+  ...businessSchema(),
+  knowsAbout: [
+    'Kitchen set custom',
+    'Lemari pakaian custom',
+    'Kamar set pengantin',
+    'Backdrop TV dan partisi ruangan',
+    'Interior kantor dinas',
+    'Fit-out toko dan tenant mall',
+    'Booth pameran knock-down',
+    'HPL Taco',
+    'PVC board anti rayap',
+    'Multipleks 18mm',
+  ],
+  slogan: 'Dibuat di workshop, dipasang dengan rapi, dirawat dengan garansi.',
+};
+
+const schema = [business, organizationSchema(), websiteSchema(), breadcrumbSchema(breadcrumbItems), aboutSchema];
+---
+
+<BaseLayout
+  title="Tentang Interior Baturaja — Workshop di OKU Selatan"
+  description="Kenali Interior Baturaja: workshop interior custom di Banding Agung, OKU Selatan, tim desain dan produksi, material yang dipakai, serta komitmen garansi untuk Baturaja dan OKU Raya."
+  keywords={['tentang interior baturaja', 'workshop interior OKU selatan', 'kontraktor interior baturaja']}
+  image="/og/tentang-kami.png"
+>
+  <JsonLd data={schema} />
+
+  <section class="hero hero-page">
+    <div class="container">
+      <Breadcrumbs items={[]} />
+      <p class="eyebrow">Profil Workshop</p>
+      <h1>Interior Baturaja: Workshop di OKU Selatan, Melayani OKU Raya</h1>
+      <p class="lead">
+        Kami adalah tim desain dan produksi interior yang berbasis di Banding Agung, tepat di kawasan Danau Ranau.
+        Fokus kami sederhana: membuat furnitur yang pas dengan ruangan, jelas materialnya, dan bisa dipertanggungjawabkan
+        setelah serah terima.
+      </p>
+      <ul class="hero-badges">
+        <li><Icon name="pin" size={15} /> Banding Agung, OKU Selatan</li>
+        <li><Icon name="tools" size={15} /> Produksi sendiri</li>
+        <li><Icon name="shield" size={15} /> Garansi tertulis</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="container sections reveal">
+    <div class="about-grid">
+      <div class="prose">
+        <p class="eyebrow">Latar Belakang</p>
+        <h2>Berawal dari Kebutuhan Furnitur yang Pas di Ruangan</h2>
+        <p>
+          Banyak rumah dan ruko di Sumatera Selatan dibangun dengan ukuran ruangan yang tidak standar. Lemari pabrikan
+          menyisakan celah, kitchen set bawaan developer terlalu pendek, dan meja kasir sering tidak muat di ruang
+          sempit. Dari situ kami mulai memproduksi furnitur custom, bukan sekadar menjual barang jadi.
+        </p>
+        <p>
+          Workshop kami berada di <strong>Jl. Pantai Bidadari Jembatan 1 Sugih Waras, Ranau, Kecamatan Banding Agung</strong>.
+          Lokasi ini dekat dengan Danau Ranau, tempat banyak villa, homestay, dan rumah tinggal yang membutuhkan
+          furnitur tahan lembap. Dari workshop yang sama, tim bergerak ke Baturaja, Muaradua, Martapura, Belitang,
+          Muara Enim, Tanjung Enim, dan Prabumulih.
+        </p>
+        <p>
+          Kami tidak mengaku sebagai perusahaan terbesar. Yang kami jaga adalah tiga hal: <strong>material sesuai
+          kesepakatan</strong>, <strong>jadwal yang realistis</strong>, dan <strong>respons setelah serah terima</strong>.
+        </p>
+      </div>
+      <div>
+        <div class="about-stats">
+          <div class="about-stat"><strong>5</strong><span>Pilar layanan</span></div>
+          <div class="about-stat"><strong>5</strong><span>Kabupaten/kota terjangkau</span></div>
+          <div class="about-stat"><strong>14–21</strong><span>Hari kerja kitchen set</span></div>
+          <div class="about-stat"><strong>3D</strong><span>Desain sebelum produksi</span></div>
+        </div>
+        <div class="info-box" style="margin-top:0;">
+          <h3>Yang membedakan kami</h3>
+          <ul>
+            <li>Produksi di workshop sendiri, bukan dikerjakan di rumah klien.</li>
+            <li>Material multipleks 18mm atau PVC board, bukan particle board.</li>
+            <li>RAB per item, bukan harga borongan tanpa rincian.</li>
+            <li>Garansi konstruksi dan penyetelan hardware.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container sections reveal">
+    <p class="eyebrow">Tim &amp; Kapasitas</p>
+    <h2>Siapa yang Mengerjakan Proyek Anda?</h2>
+    <div class="card-grid why-grid">
+      <article class="feature">
+        <span class="feature-num">01</span>
+        <h3>Desainer &amp; Estimator</h3>
+        <p>Menerjemahkan kebutuhan ruangan menjadi layout, gambar 3D, pilihan material, dan RAB yang bisa dibaca.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-num">02</span>
+        <h3>Tukang Kayu Spesialis HPL</h3>
+        <p>Menangani pemotongan, edging, perakitan modul, dan finishing HPL agar rapi dan tidak mudah terkelupas.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-num">03</span>
+        <h3>Teknisi Listrik &amp; Pencahayaan</h3>
+        <p>Memasang LED strip, track light, dan jalur kabel tersembunyi dengan memperhatikan keamanan.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-num">04</span>
+        <h3>Tim Besi &amp; Instalasi</h3>
+        <p>Membuat rangka booth, rak tinggi, dan struktur pendukung, lalu merakit di lokasi sesuai jadwal.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="container sections reveal">
+    <p class="eyebrow">Standar Kerja</p>
+    <h2>Material, Kontrol Mutu &amp; Keselamatan</h2>
+    <div class="spec-grid">
+      <article class="spec-card">
+        <h3>Material yang Dipakai</h3>
+        <ul class="spec-list">
+          <li><strong>Multipleks 18mm</strong><span>Struktur kabinet yang kuat menahan beban dan tidak mudah dol.</span></li>
+          <li><strong>PVC board 18mm</strong><span>Untuk area lembap dan rawan rayap, terutama kabinet bawah dapur.</span></li>
+          <li><strong>HPL Taco / setara</strong><span>Tahan gores dan panas, tersedia motif kayu, marmer, dan solid.</span></li>
+          <li><strong>Hardware soft-close</strong><span>Engsel dan rel yang bisa disetel serta diganti bila aus.</span></li>
+        </ul>
+      </article>
+      <article class="spec-card">
+        <h3>Kontrol Mutu</h3>
+        <ul class="spec-list">
+          <li><strong>QC sebelum kirim</strong><span>Dimensi, kelurusan panel, edging, dan fungsi hardware diperiksa.</span></li>
+          <li><strong>Uji rakit</strong><span>Modul dirakit sementara untuk memastikan tidak ada benturan saat instalasi.</span></li>
+          <li><strong>Serah terima</strong><span>Pengecekan bersama klien dan penjelasan cara merawat furnitur.</span></li>
+        </ul>
+      </article>
+      <article class="spec-card">
+        <h3>Keselamatan Kerja</h3>
+        <ul class="spec-list">
+          <li><strong>Produksi terpusat</strong><span>Debu dan bau lem tidak masuk ke rumah atau toko klien.</span></li>
+          <li><strong>APD &amp; proteksi</strong><span>Pekerja memakai pelindung dan melapisi lantai saat instalasi.</span></li>
+          <li><strong>Instalasi listrik</strong><span>Dikerjakan teknisi dan diuji sebelum diserahkan.</span></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="container sections reveal">
+    <p class="eyebrow">Komitmen</p>
+    <h2>Apa yang Anda Dapatkan Setelah Serah Terima?</h2>
+    <div class="prose">
+      <p>
+        Garansi kami bukan janji lisan. Setiap proyek memiliki catatan spesifikasi material, jumlah modul, dan masa
+        garansi. Jika engsel meleset, rel macet, atau pintu tidak sejajar dalam masa garansi, tim kami datang untuk
+        menyetel atau mengganti komponen. Untuk kerusakan akibat pemakaian tidak wajar atau perubahan oleh pihak lain,
+        kami tetap membantu perbaikan dengan biaya transparan.
+      </p>
+      <p>
+        Kami juga terbuka jika Anda ingin membandingkan penawaran. Kirim RAB vendor lain, dan kami bantu jelaskan
+        perbedaan material atau lingkup pekerjaan — tanpa harus memesan ke kami.
+      </p>
+    </div>
+    <div class="info-box">
+      <h3>Area layanan</h3>
+      <ul>
+        <li><strong>Baturaja &amp; Kab. OKU:</strong> Baturaja Timur, Baturaja Barat, Air Paoh, Sukaraya, Kemelak, Sekar Jaya, Tanjung Baru, Tanjung Agung, Pasar Baru, Lubuk Batang, Peninjauan.</li>
+        {AREAS.map((a) => <li><strong>{a.name}:</strong> {a.districts.slice(0, 5).join(', ')}, dan sekitarnya.</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Ingin Melihat Workshop atau Minta Referensi Proyek?"
+    text="Anda bisa menjadwalkan kunjungan ke workshop Banding Agung atau meminta dokumentasi proyek yang mirip dengan kebutuhan Anda."
+    message={`Halo Interior Baturaja, saya ingin bertanya tentang workshop dan referensi proyek.`}
+    label="Hubungi Tim via WhatsApp"
+  />
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+interface Faq {
+  question?: string;
+  answer?: string;
+  q?: string;
+  a?: string;
+}
+
+interface Props {
+  faqs: Faq[];
+  title?: string;
+  eyebrow?: string;
+  id?: string;
+}
+
+const { faqs, title = 'Pertanyaan yang Sering Diajukan', eyebrow = 'Tanya Jawab', id = 'faq' } = Astro.props;
+const normalized = faqs.map((f) => ({
+  question: f.question ?? f.q ?? '',
+  answer: f.answer ?? f.a ?? '',
+}));
+---
+
+{
+  normalized.length > 0 && (
+    <section class="container faq" id={id}>
+      <p class="eyebrow">{eyebrow}</p>
+      <h2>{title}</h2>
+      <div class="faq-list">
+        {normalized.map((f) => (
+          <details>
+            <summary>{f.question}</summary>
+            <p>{f.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import JsonLd from '../components/JsonLd.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, waLink } from '../config/site';
+import { SERVICES } from '../data/services';
+import { AREAS } from '../data/areas';
+import { businessSchema, organizationSchema, websiteSchema, breadcrumbSchema } from '../lib/schema';
+
+const url = new URL('/kontak/', SITE.domain).href;
+const breadcrumbItems = [{ name: 'Kontak', url }];
+
+const contactSchema = {
+  '@type': 'ContactPage',
+  '@id': `${url}#contactpage`,
+  url,
+  name: 'Kontak Interior Baturaja',
+  description:
+    'Hubungi Interior Baturaja via WhatsApp 0853-1002-4736 atau kunjungi workshop di Banding Agung, OKU Selatan.',
+  isPartOf: { '@id': SITE.domain + '/#website' },
+  about: { '@id': SITE.domain + '/#business' },
+  mainEntity: { '@id': SITE.domain + '/#business' },
+  inLanguage: 'id-ID',
+};
+
+const schema = [businessSchema(), organizationSchema(), websiteSchema(), breadcrumbSchema(breadcrumbItems), contactSchema];
+---
+
+<BaseLayout
+  title="Kontak & Konsultasi Interior Baturaja"
+  description="Hubungi Interior Baturaja: WhatsApp 0853-1002-4736, email, dan alamat workshop di Jl. Pantai Bidadari Jembatan 1 Sugih Waras, Banding Agung, OKU Selatan. Konsultasi dan survei terjadwal."
+  keywords={['kontak interior baturaja', 'whatsapp interior baturaja', 'alamat workshop interior OKU selatan']}
+  image="/og/kontak.png"
+>
+  <JsonLd data={schema} />
+
+  <section class="hero hero-page">
+    <div class="container">
+      <Breadcrumbs items={[]} />
+      <p class="eyebrow">Kontak &amp; Konsultasi</p>
+      <h1>Hubungi Interior Baturaja</h1>
+      <p class="lead">
+        Kirim ukuran ruangan, foto lokasi, atau target anggaran. Kami akan merespons dengan pertanyaan yang perlu
+        dipastikan, estimasi awal, dan opsi jadwal survei.
+      </p>
+      <div class="service-hero-actions">
+        <a class="wa-cta" href={waLink('Halo Interior Baturaja, saya ingin konsultasi interior.')} target="_blank" rel="noopener">
+          <Icon name="chat" size={17} /> Chat WhatsApp Sekarang
+        </a>
+        <a class="ghost-cta" href={`tel:${SITE.phone.replace(/\s|-/g, '')}`}>Telepon {SITE.phoneDisplay}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container sections">
+    <div class="contact-grid">
+      <div>
+        <div class="contact-card">
+          <h2>Form Konsultasi Cepat</h2>
+          <p class="muted" style="margin-top:-6px;font-size:0.9rem;">
+            Isi data singkat berikut. Setelah tombol ditekan, pesan akan terbuka di WhatsApp dengan rangkuman otomatis.
+          </p>
+          <form id="wa-consult-form" novalidate>
+            <div class="form-row">
+              <label for="nama">Nama</label>
+              <input id="nama" name="nama" type="text" placeholder="Nama Anda" autocomplete="name" required />
+            </div>
+            <div class="form-row">
+              <label for="layanan">Jenis layanan</label>
+              <select id="layanan" name="layanan" required>
+                <option value="">Pilih layanan</option>
+                {SERVICES.map((s) => <option value={s.shortTitle}>{s.shortTitle}</option>)}
+                <option value="Lainnya">Lainnya / belum tahu</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="lokasi">Lokasi proyek</label>
+              <input id="lokasi" name="lokasi" type="text" placeholder="Contoh: Air Paoh, Baturaja Timur" required />
+            </div>
+            <div class="form-row">
+              <label for="ukuran">Ukuran / kebutuhan (opsional)</label>
+              <input id="ukuran" name="ukuran" type="text" placeholder="Contoh: dapur 3 x 1,5 m, lemari 2 x 3 m" />
+            </div>
+            <div class="form-row">
+              <label for="pesan">Catatan tambahan</label>
+              <textarea id="pesan" name="pesan" placeholder="Budget, target waktu, atau referensi desain"></textarea>
+            </div>
+            <button type="submit" class="wa-cta" style="width:100%;border:0;cursor:pointer;font:inherit;font-weight:600;">
+              Kirim Ringkasan via WhatsApp
+            </button>
+            <p class="form-note">
+              Form ini tidak menyimpan data di server. Pesan hanya dikirim melalui aplikasi WhatsApp Anda.
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <div>
+        <div class="contact-card" style="margin-bottom:20px;">
+          <h2>Kontak Resmi</h2>
+          <ul class="contact-list">
+            <li>
+              <Icon name="whatsapp" size={20} />
+              <div><strong>WhatsApp / Telepon</strong><a href={waLink()}>{SITE.phoneDisplay}</a><span>Respons pada jam kerja</span></div>
+            </li>
+            <li>
+              <Icon name="mail" size={20} />
+              <div><strong>Email</strong><a href={`mailto:${SITE.email}`}>{SITE.email}</a><span>Untuk penawaran &amp; dokumen</span></div>
+            </li>
+            <li>
+              <Icon name="pin" size={20} />
+              <div>
+                <strong>Workshop &amp; Kantor</strong>
+                <span>{SITE.workshop.street}, {SITE.workshop.district}, {SITE.workshop.city}, {SITE.workshop.province} {SITE.workshop.postalCode}</span>
+              </div>
+            </li>
+            <li>
+              <Icon name="clock" size={20} />
+              <div><strong>Jam Operasional</strong><span>{SITE.openingHoursText}</span></div>
+            </li>
+            <li>
+              <Icon name="building" size={20} />
+              <div><strong>Area Layanan</strong><span>Baturaja, OKU, OKU Selatan, OKU Timur, Muara Enim, Prabumulih</span></div>
+            </li>
+          </ul>
+        </div>
+
+        <iframe
+          class="map-embed"
+          src={SITE.mapsEmbed}
+          title="Lokasi workshop Interior Baturaja di Banding Agung, OKU Selatan"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="container sections">
+    <p class="eyebrow">Sebelum Menghubungi</p>
+    <h2>Informasi yang Mempercepat Estimasi</h2>
+    <div class="why-grid">
+      <article class="feature">
+        <span class="feature-num">01</span>
+        <h3>Ukuran kasar ruangan</h3>
+        <p>Cukup panjang × lebar × tinggi. Bisa dari meteran manual atau aplikasi di ponsel.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-num">02</span>
+        <h3>Foto kondisi lokasi</h3>
+        <p>Foto dinding, lantai, plafon, dan posisi stop kontak membantu kami menilai metode pemasangan.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-num">03</span>
+        <h3>Target waktu &amp; budget</h3>
+        <p>Dengan dua informasi ini, kami bisa menyarankan paket dan material yang paling realistis.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-num">04</span>
+        <h3>Referensi desain</h3>
+        <p>Screenshot Pinterest, Instagram, atau foto rumah tetangga cukup untuk menyamakan selera.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="container sections">
+    <p class="eyebrow">Area Terdekat</p>
+    <h2>Halaman Area Layanan</h2>
+    <div class="chip-row">
+      <a class="chip" href="/">Baturaja &amp; OKU</a>
+      {AREAS.map((a) => <a class="chip" href={`/area-layanan/${a.slug}/`}>{a.name}</a>)}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function setupConsultForm() {
+    const form = document.getElementById('wa-consult-form') as HTMLFormElement | null;
+    if (!form || form.dataset.ready === 'true') return;
+    form.dataset.ready = 'true';
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const value = (id: string) =>
+        (document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null)?.value?.trim() ?? '';
+
+      const nama = value('nama');
+      const layanan = value('layanan');
+      const lokasi = value('lokasi');
+      const ukuran = value('ukuran');
+      const pesan = value('pesan');
+
+      if (!nama || !layanan || !lokasi) {
+        alert('Mohon isi nama, jenis layanan, dan lokasi proyek.');
+        return;
+      }
+
+      const lines = [
+        'Halo Interior Baturaja, saya ingin konsultasi.',
+        '',
+        `Nama: ${nama}`,
+        `Layanan: ${layanan}`,
+        `Lokasi: ${lokasi}`,
+        ukuran ? `Ukuran/kebutuhan: ${ukuran}` : '',
+        pesan ? `Catatan: ${pesan}` : '',
+      ].filter(Boolean);
+
+      window.open(
+        `https://wa.me/6285310024736?text=${encodeURIComponent(lines.join('\n'))}`,
+        '_blank',
+        'noopener'
+      );
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', setupConsultForm);
+  document.addEventListener('astro:page-load', setupConsultForm);
+</script>

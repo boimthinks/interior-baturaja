@@ -1,0 +1,239 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Visual from '../components/Visual.astro';
+import GoogleSourcePreferences from '../components/GoogleSourcePreferences.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { SITE, waLink, formatDate } from '../config/site';
+import { SERVICES } from '../data/services';
+import { articleSchema, breadcrumbSchema, faqSchema, businessSchema, organizationSchema, websiteSchema } from '../lib/schema';
+import { readingTime, type Post } from '../lib/content';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  post: Post;
+  headings: Heading[];
+  related: Post[];
+}
+
+const { post, headings, related } = Astro.props;
+const d = post.data;
+const isPortfolio = d.category === 'Portfolio';
+const sectionUrl = new URL(isPortfolio ? '/portfolio/' : '/blog/', SITE.domain).href;
+const url = new URL(`/${isPortfolio ? 'portfolio' : 'blog'}/${post.id}/`, SITE.domain).href;
+const service = SERVICES.find((s) => `/layanan/${s.slug}/` === d.relatedServiceUrl || `/layanan/${s.slug}` === d.relatedServiceUrl);
+const minutes = readingTime(post.body);
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+
+const breadcrumbItems = [
+  { name: isPortfolio ? 'Portofolio' : 'Blog', url: sectionUrl },
+  ...(service ? [{ name: service.shortTitle, url: new URL(`/layanan/${service.slug}/`, SITE.domain).href }] : []),
+  { name: d.title, url },
+];
+
+const waMessage = `Halo Interior Baturaja, saya membaca ${isPortfolio ? 'studi proyek' : 'artikel'} "${d.title}". Saya ingin konsultasi ${service ? service.shortTitle.toLowerCase() : 'interior'} di OKU Raya.`;
+
+const schemaGraph = [
+  businessSchema(),
+  organizationSchema(),
+  websiteSchema(),
+  articleSchema(post, url),
+  breadcrumbSchema(breadcrumbItems),
+  ...(d.faqs.length ? [faqSchema(d.faqs, url)] : []),
+];
+---
+
+<BaseLayout
+  title={d.title}
+  description={d.description}
+  keywords={d.targetKeywords}
+  image={d.heroImage ?? `/og/${post.id}.png`}
+  type="article"
+  publishedTime={d.pubDate?.toISOString()}
+  modifiedTime={(d.updatedDate ?? d.pubDate)?.toISOString()}
+  articleSection={isPortfolio ? 'Portofolio' : 'Blog'}
+>
+  <JsonLd data={schemaGraph} />
+
+  <div class="container article-container">
+    <Breadcrumbs items={breadcrumbItems.slice(0, -1)} />
+
+    <div class="article-layout-grid">
+      <article class="article-main-content">
+        {d.draft && (
+          <p class="draft-badge">Draft — halaman ini belum diindeks mesin pencari.</p>
+        )}
+
+        <header class="article-header">
+          <a class="article-category-badge" href={isPortfolio ? '/portfolio/' : '/blog/'}>
+            {isPortfolio ? 'Studi Proyek' : 'Artikel'}
+          </a>
+          <h1>{d.title}</h1>
+          <p class="article-byline">
+            Oleh <strong>{d.author}</strong>
+            {d.pubDate && (
+              <> · <time datetime={d.pubDate.toISOString()}>{formatDate(d.pubDate)}</time></>
+            )}
+            {d.updatedDate && (
+              <> · Diperbarui <time datetime={d.updatedDate.toISOString()}>{formatDate(d.updatedDate)}</time></>
+            )}
+            {' '}· {minutes} menit baca
+          </p>
+          <div class="post-card-tags" style="margin-bottom:22px;">
+            {d.tags.map((t) => <a class="post-tag" href={`${sectionUrl}?tag=${encodeURIComponent(t)}`}>{t}</a>)}
+          </div>
+        </header>
+
+        <div class="reveal article-featured-img">
+          <Visual
+            src={d.heroImage}
+            alt={d.heroAlt ?? d.title}
+            ratio="4 / 3"
+            label={isPortfolio ? 'Dokumentasi proyek' : 'Ilustrasi artikel'}
+            eager
+          />
+        </div>
+
+        {isPortfolio && d.projectDetails && (
+          <dl class="project-facts">
+            <div class="project-fact">
+              <dt>Proyek / Klien</dt>
+              <dd>{d.projectDetails.clientOrProject}</dd>
+            </div>
+            <div class="project-fact">
+              <dt>Lokasi</dt>
+              <dd>{d.projectDetails.location}</dd>
+            </div>
+            <div class="project-fact">
+              <dt>Material</dt>
+              <dd>{d.projectDetails.material}</dd>
+            </div>
+            <div class="project-fact">
+              <dt>Durasi</dt>
+              <dd>{d.projectDetails.duration}</dd>
+            </div>
+            <div class="project-fact">
+              <dt>Tahun</dt>
+              <dd>{d.projectDetails.year}</dd>
+            </div>
+          </dl>
+        )}
+
+        <div class="article-body">
+          <slot />
+        </div>
+
+        <GoogleSourcePreferences label="Tambah Interior Baturaja sebagai Sumber Favorit di Google" />
+
+        <section class="article-bottom-offer">
+          <div class="article-offer-content">
+            <h3>{service ? `Butuh ${service.shortTitle} di Baturaja / OKU Raya?` : 'Butuh Jasa Interior di OKU Raya?'}</h3>
+            <p>
+              Konsultasikan ukuran ruangan dan kebutuhan Anda. Tim workshop kami membantu menghitung kebutuhan material,
+              membuat desain, dan menyusun RAB transparan sebelum pengerjaan.
+            </p>
+            <div class="article-offer-actions">
+              <a class="wa-cta" href={waLink(waMessage)} target="_blank" rel="noopener">Chat WhatsApp Sekarang</a>
+              {service && (
+                <a class="ghost-cta" href={`/layanan/${service.slug}/`}>Lihat Layanan {service.shortTitle}</a>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {related.length > 0 && (
+          <section class="article-related-bottom">
+            <h3 class="article-related-heading">
+              {isPortfolio ? 'Proyek Lain yang Mirip' : 'Artikel Terkait'}
+            </h3>
+            <div class="article-related-grid">
+              {related.map((rel) => (
+                <a class="article-related-card" href={`/${rel.data.category === 'Portfolio' ? 'portfolio' : 'blog'}/${rel.id}/`}>
+                  <div class="article-related-thumb">
+                    <Visual src={rel.data.heroImage} alt={rel.data.title} ratio="4 / 3" label={rel.data.category} />
+                  </div>
+                  <div class="article-related-info">
+                    <h4>{rel.data.title}</h4>
+                    {rel.data.pubDate && (
+                      <time datetime={rel.data.pubDate.toISOString()}>{formatDate(rel.data.pubDate)}</time>
+                    )}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-widget sidebar-cta-widget">
+          <span class="sidebar-badge">Konsultasi &amp; Survei</span>
+          <h3 class="sidebar-widget-title">{service ? service.shortTitle : 'Jasa Interior'} di OKU Raya</h3>
+          <p class="sidebar-widget-desc">
+            {service ? service.description : 'Workshop interior custom untuk rumah, kantor, toko, dan booth pameran di Baturaja & OKU Raya.'}
+          </p>
+
+          {service && (
+            <div class="price-highlight">
+              <span>Estimasi mulai</span>
+              <strong>{service.priceFrom}</strong>
+              <small>{service.priceUnit}</small>
+            </div>
+          )}
+
+          <a class="wa-cta sidebar-wa-btn" href={waLink(waMessage)} target="_blank" rel="noopener">Chat WhatsApp</a>
+
+          <ul class="sidebar-trust-list">
+            <li>✓ Workshop sendiri di OKU Selatan</li>
+            <li>✓ Material HPL &amp; PVC anti rayap</li>
+            <li>✓ Desain 3D sebelum produksi</li>
+            <li>✓ Garansi konstruksi &amp; hardware</li>
+          </ul>
+
+          <div class="sidebar-contact-box">
+            <p><strong>Workshop:</strong> {SITE.workshop.street}, {SITE.workshop.district}</p>
+            <p><strong>WhatsApp:</strong> {SITE.phoneDisplay}</p>
+            <p><strong>Jam:</strong> Senin–Sabtu 08.00–17.00 WIB</p>
+          </div>
+
+          {service && (
+            <a class="sidebar-more-link" href={`/layanan/${service.slug}/`}>Lihat layanan selengkapnya →</a>
+          )}
+        </div>
+
+        {toc.length > 2 && (
+          <nav class="sidebar-widget toc-widget" aria-label="Daftar isi artikel">
+            <h3 class="sidebar-widget-title">Daftar Isi</h3>
+            <ul class="toc-list">
+              {toc.map((h) => (
+                <li><a href={`#${h.slug}`} class:list={[`depth-${h.depth}`]}>{h.text}</a></li>
+              ))}
+            </ul>
+          </nav>
+        )}
+
+        <div class="sidebar-widget">
+          <h3 class="sidebar-widget-title">Layanan Kami</h3>
+          <ul class="sidebar-services-list">
+            {SERVICES.map((s) => (
+              <li>
+                <a
+                  class:list={['sidebar-service-item', { active: service?.slug === s.slug }]}
+                  href={`/layanan/${s.slug}/`}
+                >
+                  <span>{s.shortTitle}</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
