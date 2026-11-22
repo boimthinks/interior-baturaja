@@ -1,114 +1,91 @@
 ---
-title: "Inspirasi Desain Interior Kafe, Bakery & Coffee Shop Hemat Budget di Baturaja"
-description: "Inspirasi desain interior kafe, bakery, dan coffee shop hemat budget di Baturaja: bar counter, bench, rak roti, pencahayaan, dan bagian yang tidak boleh dihemat."
+title: "Desain Interior Kafe dan Coffee Shop Hemat Budget Baturaja"
+description: "Panduan interior kafe dan coffee shop hemat budget di Baturaja: prioritas belanja bar counter dan etalase roti, simulasi RAB, material awet, serta build-out bertahap."
+pubDate: 2026-11-22
+heroImage: "/images/blog/desain-interior-kafe-bakery-hemat-budget-baturaja.webp"
 category: "Blog"
 tags: ["Interior Toko, Mall & Booth", "Baturaja"]
-targetKeywords: ["desain interior kafe baturaja", "interior coffee shop hemat budget", "interior bakery", "biaya fit out kafe"]
+targetKeywords: ["desain interior kafe baturaja", "jasa interior coffee shop baturaja", "biaya buka kafe sederhana", "interior bakery hemat budget"]
 relatedServiceUrl: "/layanan/interior-toko-mall-booth-pameran-baturaja/"
+heroAlt: "Bar counter HPL dan etalase roti kaca pada interior coffee shop ruko di Baturaja"
 faqs:
-  - question: "Berapa biaya membuat interior kafe atau coffee shop kecil?"
-    answer: "Untuk area seluas 30 sampai 60 meter persegi, fit-out dengan bar counter, meja, bench, dan pencahayaan berada di kisaran Rp1.500.000 sampai Rp2.800.000 per meter persegi. Angka itu tergantung material, jumlah tempat duduk, dan pekerjaan listrik."
-  - question: "Bagian mana yang sebaiknya tidak dihemat saat membuat kafe?"
-    answer: "Bar counter, rangka tempat duduk, dan instalasi listrik. Tiga bagian ini paling sering rusak lebih dulu dan biaya perbaikannya lebih besar daripada selisih harga material awal."
-  - question: "Apakah bakery butuh rak display khusus?"
-    answer: "Iya. Roti membutuhkan rak dengan sirkulasi udara dan permukaan mudah dibersihkan. Etalase tertutup rapat membuat roti berembun, terutama di ruangan ber-AC."
-  - question: "Berapa lama pembuatan interior kafe?"
-    answer: "Rata-rata 3 sampai 5 minggu setelah desain disetujui, termasuk produksi di workshop dan instalasi di lokasi. Pekerjaan listrik dan plumbing biasanya menjadi bagian yang paling menentukan jadwal."
-draft: true
+  - question: "Berapa modal interior kafe sederhana di Baturaja?"
+    answer: "Untuk fit-out tahap pertama kafe ruko berukuran sekitar 80 meter persegi, angka yang masuk akal ada di kisaran Rp25 sampai Rp45 juta. Rinciannya mencakup bar counter, etalase roti, pencahayaan, dan pengecatan. Nilai akhirnya tetap tergantung ukuran, material, dan aksesori yang dipilih setelah survei."
+  - question: "Apakah kafe harus tutup selama pengerjaan interior?"
+    answer: "Tidak harus. Produksi modul dilakukan di workshop, sehingga di lokasi hanya ada pemasangan. Pekerjaan bisa dipecah per zona dan jadwal bongkar pasang menyesuaikan jam operasional kafe atau jam tetangga ruko."
+  - question: "Material apa yang paling awet untuk bar counter kafe?"
+    answer: "Multipleks 18mm dengan finishing HPL lebih tahan daripada particle board. Permukaannya tidak mudah menggelembung karena tumpahan kopi dan sekrupnya tidak cepat dol. Untuk area sink dan bar belakang yang sering basah, PVC board 18mm lebih aman lagi."
 ---
 
-Kafe di Baturaja jarang mulai dari ruang kosong yang sempurna. Sebagian menempati ruko lama dengan plafon rendah, sebagian lagi memakai rumah yang diubah, dan tidak sedikit yang berbagi bangunan dengan usaha lain. Anggaran biasanya terbatas, tetapi keinginan untuk terlihat menarik tetap ada.
+Ada pola yang berulang di kafe-kafe kecil di Baturaja. Modal utama habis untuk dekorasi dinding, lampu hias, dan tanaman. Begitu buka, masalah muncul dari arah lain: etalase roti pakai kaca biasa yang retak saat disentuh anak, bar counter dari partisi lama yang permukaannya menggelembung karena tumpahan susu, dan lampu putih dingin bikin roti kelihatan pucat.
 
-Kondisi itu sebenarnya bukan hambatan. Beberapa kafe dengan biaya paling efisien yang kami kerjakan justru lahir dari ruang yang terbatas, karena semua keputusan harus jelas: apa yang dipakai pelanggan, apa yang dipakai staf, dan mana yang bisa ditunda.
+Interior kafe sebenarnya bukan soal dekorasi. Untuk desain interior kafe baturaja yang beroperasi di ruko dengan budget terbatas, dua elemen yang paling menentukan keputusan beli pelanggan justru bar counter dan display produk. Dua-duanya perlu dikerjakan lebih dulu, dan dua-duanya butuh material yang benar.
 
-## Mulai dari jumlah kursi, bukan dari tema
+## Prioritas belanja dari yang wajib ke yang bisa nanti
 
-Keputusan pertama bukan warna atau motif. Yang pertama adalah berapa kursi yang bisa dilayani dengan nyaman oleh dapur dan bar yang ada.
+Cara paling cepat menghemat budget adalah memisahkan pekerjaan menjadi dua fase. Fase pertama adalah yang menyangkut produksi dan keamanan. Fase kedua boleh ditunda sampai omzet jalan.
 
-Kafe kecil dengan 20 kursi dan satu barista bisa berjalan lancar. Kafe dengan 45 kursi tetapi bar hanya selebar 1,8 meter akan menumpuk pesanan pada jam ramai. Dari pengalaman kami, bar dengan lebar minimal 2,4 meter sudah cukup untuk satu mesin espresso, satu area penyajian, dan satu titik pembayaran.
+**Fase pertama (wajib sebelum buka):**
 
-Setelah jumlah kursi ditetapkan, baru layout dibuat:
+- Bar counter dengan ukuran dan ketinggian yang sesuai alur kerja barista
+- Etalase roti atau display kue dengan kaca tempered
+- Pencahayaan display, terutama track light di atas etalase
+- Jalur listrik untuk mesin espresso, oven, dan chiller
+- Meja kursi untuk kapasitas minimal
 
-- **Zona masuk dan pesan** di depan, dengan jalur yang tidak memotong area duduk.
-- **Bar** di sisi yang terlihat dari pintu, karena bar adalah panggung utama coffee shop.
-- **Area duduk** dibagi menjadi meja pendek dan bench panjang.
-- **Area staf** di balik bar, dengan akses ke tempat cuci.
-- **Toilet dan storage** di bagian belakang, tidak dilewati pelanggan.
+**Fase kedua (boleh menyusul):**
 
-## Bagian yang bisa dihemat
+- Wallpanel WPC atau kisi-kisi kayu di dinding foto
+- Plafon gantung dan lampu hias
+- Area selfie atau mural
+- Perab tambahan di lantai dua
 
-Ada beberapa komponen yang aman untuk ditekan biayanya tanpa merusak pengalaman pelanggan.
+Urutan ini bukan teori. Pemilik yang mengerjakan fase dua lebih dulu biasanya mengulang biaya, karena bar counter yang salah ukuran harus dibongkar dan itu berarti membayar dua kali.
 
-**Dinding.** Cat tekstur atau panel HPL motif beton hanya pada satu sisi sebagai aksen. Sisi lain cukup cat. Ini menghemat cukup banyak dibanding melapisi seluruh dinding.
+## Simulasi angka untuk kafe ruko dua lantai
 
-**Tempat duduk.** Bench panjang berbahan multipleks 18mm dengan bantalan busa lebih murah per kursi dibanding kursi individual. Bench juga membuat ruangan terlihat lebih rapi.
+Sebagai gambaran, ambil kasus ruko dua lantai di sekitar Pasar Baru dengan area operasional sekitar 80 meter persegi. Semua angka di bawah adalah rentang estimasi, bukan harga final, karena nilai sesungguhnya baru bisa ditarik setelah survei ukuran.
 
-**Meja.** Top table multipleks dengan HPL motif kayu sudah cukup. Tidak perlu marmer untuk meja yang setiap hari kena gelas basah.
+| Item | Spesifikasi | Satuan | Estimasi |
+| --- | --- | --- | --- |
+| Bar counter | Multipleks 18mm, HPL, laci dan ruang mesin | m¹ | Rp1.800.000 - Rp2.600.000 |
+| Etalase roti | Kaca tempered, rangka besi, LED strip | unit | mulai Rp4.500.000 |
+| Track light display | LED warm white 3000K, rel 2 meter | set | Rp1.500.000 - Rp2.500.000 |
+| Partisi dan wallpanel | Multipleks + HPL atau WPC | m² | Rp1.700.000 - Rp2.500.000 |
+| Meja resepsionis/kasir | HPL, LED strip, laci | m¹ | Rp2.000.000 - Rp2.800.000 |
+| Pengecatan dan plafon ringan | Perbaikan permukaan | m² | Rp150.000 - Rp350.000 |
 
-**Dekorasi.** Rak dinding terbuka untuk cangkir dan tanaman memberi kesan hidup tanpa biaya besar. Yang penting raknya dipasang ke dinding dengan penopang yang benar.
+Bar counter tiga meter dan etalase satu unit saja sudah menyerap sekitar sepuluh juta. Setelah pencahayaan, partisi, dan finishing, fase pertama umumnya bergerak di kisaran Rp25 sampai Rp45 juta. Angka ini masih jauh lebih terkendali dibanding fit-out toko penuh 3 sampai 5 minggu yang mencakup semua zona.
 
-**Pencahayaan.** Satu jenis lampu gantung di atas bar dan LED strip di bawah rak sudah membentuk suasana. Tidak perlu banyak titik dengan warna berbeda.
+![Etalase roti kaca tempered dengan display pastry di counter HPL coffee shop Baturaja](/images/blog/desain-interior-kafe-bakery-hemat-budget-baturaja-2.webp)
 
-## Bagian yang sebaiknya tidak dihemat
+Untuk lokasi di luar Baturaja seperti Muara Enim atau Prabumulih, biaya transportasi dan akomodasi tim dihitung terpisah dan selalu tertulis di RAB sebelum DP.
 
-**Bar counter.** Ini bagian yang paling sering dipakai dan paling terlihat. Rangka yang kurang kuat akan terasa bergoyang saat barista menyandarkan tangan. Permukaan HPL tipis akan tergores dalam hitungan bulan.
+## Material yang tahan ritme kerja kafe
 
-**Rangka tempat duduk.** Bench dengan rangka kayu tanpa penopang tengah akan melengkung setelah beberapa bulan dipakai. Kami biasanya menambahkan rangka besi hollow di bagian dalam.
+Kafe punya ritme kerja yang lebih keras dari toko biasa. Tumpahan kopi, uap susu, kelembapan dari sink, dan beban mesin espresso membuat pemilihan material bukan soal selera.
 
-**Instalasi listrik.** Kafe memakai banyak peralatan dengan beban besar: mesin espresso, grinder, kulkas display, dan oven. Titik listrik yang kurang akan memaksa pemakaian ekstensi, yang berisiko dan berantakan.
+**Bar counter.** Struktur kami memakai multipleks 18mm dengan finishing HPL, bukan particle board. Particle board di bar counter hampir selalu gagal dalam satu sampai dua tahun: permukaan menggelembung karena tumpahan cairan dan sekrupnya dol sehingga top table goyang. Untuk bagian belakang yang sering basah, PVC board 18mm high density lebih aman lagi karena tidak menyerap air.
 
-**Lantai area basah.** Area cuci dan bar sering terkena tumpahan. Vinyl atau keramik lebih baik daripada lantai kayu di area ini.
+**Etalase roti.** Kacanya wajib tempered, bukan kaca biasa. Etalase bakery adalah satu-satunya perabut yang disentuh pelanggan setiap hari, termasuk anak-anak. Kaca tempered pecahnya butiran kecil, bukan pecahan tajam panjang.
 
-## Bakery: roti butuh sirkulasi, bukan kaca rapat
+**Pencahayaan.** Track light warm white 3000K di atas display membuat roti terlihat kecokelatan alami. Lampu 6500K yang putih dingin membuat pastry tampak pucat dan tidak segar. Di area bar, LED strip 3000K di bawah top counter cukup untuk suasana tanpa bikin mata barista lelah.
 
-Bakery punya kebutuhan berbeda dari coffee shop. Display roti bukan sekadar etalase, tetapi alat penjualan.
+Dua hal di lapangan yang sering dilupakan: daya listrik untuk mesin espresso dan oven perlu dihitung dari awal, dan akses ruko yang sempit menentukan apakah modul counter dibuat utuh atau terpisah. Keduanya dicek saat survei, bukan saat instalasi.
 
-Beberapa hal yang kami terapkan:
+## Build-out bertahap tanpa menutup kafe
 
-- **Rak display dengan alas rotan atau kawat** agar udara bisa lewat di bawah roti.
-- **Kaca depan tanpa penutup rapat** untuk roti yang dijual cepat, supaya tidak berembun.
-- **Etalase tertutup dengan ventilasi kecil** untuk kue basah yang perlu perlindungan.
-- **Lampu 3000K** di atas display, cukup terang untuk melihat warna kulit roti tanpa membuatnya terlihat pucat.
-- **Meja kerja dan rak baki** di belakang, dengan jalur pendek ke display agar roti tidak melewati area pelanggan.
+Kalau kafe sudah berjalan dan hanya ingin memperbarui sebagian, pekerjaan tidak perlu menutup operasional. Pola yang kami pakai mirip dengan renovasi toko pada umumnya: semua pemotongan dan finishing dikerjakan di workshop di Banding Agung, jadi debu dan bau lem tidak masuk ke area pelanggan. Pemasangan di lokasi dipecah per zona, dan zona yang lain tetap beroperasi.
 
-Satu kesalahan yang sering kami temukan: rak roti dibuat terlalu dalam sehingga roti di baris belakang tertinggal dan tidak terjual. Kedalaman 30–35 sentimeter sudah cukup untuk sebagian besar produk bakery.
+Alurnya lima tahap. Konsultasi awal lewat WhatsApp dengan foto dan ukuran kasar, survei untuk cek dinding, lantai, dan jalur listrik, desain 3D beserta RAB per item, produksi di workshop, lalu instalasi dan serah terima dengan garansi konstruksi tertulis. Durasi produksi untuk pekerjaan skala kafe umumnya satu sampai tiga minggu setelah desain disetujui.
 
-## Material yang masuk akal untuk anggaran terbatas
+## Checklist sebelum pilih vendor fit-out kafe
 
-| Komponen | Pilihan hemat | Pilihan lebih tahan |
-| --- | --- | --- |
-| Bar counter | Multipleks 18mm + HPL | Rangka besi + panel HPL + top table granit |
-| Meja pelanggan | Multipleks + HPL motif kayu | Top table solid atau granit |
-| Bench | Rangka kayu + busa | Rangka hollow + busa density tinggi |
-| Dinding aksen | Cat tekstur | Panel HPL atau WPC |
-| Pencahayaan | Lampu gantung + LED strip | Track light + dimmer per zona |
-| Lantai | Vinyl lembaran | Keramik motif kayu atau homogen tile |
+- Vendor punya workshop sendiri, bukan sekadar makelar yang lempar pekerjaan
+- RAB dirinci per item dengan satuan jelas, bukan satu angka paket
+- Spesifikasi material tertulis: ketebalan multipleks, merek HPL, jenis kaca
+- Vendor paham kebutuhan listrik mesin espresso, oven, dan chiller
+- Ada garansi konstruksi dan penyetelan tertulis di dokumen serah terima
+- Jadwal pemasangan menyesuaikan jam operasional kafe dan tetangga ruko
 
-Pilihan di kolom kiri bukan berarti murahan. Untuk kafe yang baru berjalan, material tersebut sudah memadai. Yang penting adalah pemasangan rapi dan sambungan tertutup.
-
-## Tiga denah yang sering dipakai
-
-**Denah memanjang.** Cocok untuk ruko 4 × 12 meter. Bar di sisi kiri sepanjang 3 meter, bench di sisi kanan, meja kecil di tengah. Jalur pelanggan lurus dari pintu ke kasir.
-
-**Denah huruf L.** Cocok untuk ruang sudut. Bar di satu sisi, area duduk di sisi lain, dengan satu meja besar komunal di tengah sebagai daya tarik.
-
-**Denah pulau.** Cocok untuk ruang lebar. Bar di tengah, kursi mengelilingi, dan display roti di sisi masuk. Denah ini butuh jalur listrik dan plumbing yang matang karena bar berada jauh dari dinding.
-
-## Waktu dan urutan pekerjaan
-
-Fit-out kafe umumnya memakan 3 sampai 5 minggu setelah desain disetujui. Urutan yang kami pakai:
-
-1. Pekerjaan listrik dan plumbing dasar.
-2. Pemasangan rangka bar dan bench.
-3. Panel dan finishing HPL.
-4. Pemasangan top table.
-5. Pencahayaan dan penyetelan.
-6. Pembersihan dan serah terima.
-
-Pekerjaan listrik dan plumbing hampir selalu menjadi penentu. Kalau titik air untuk bar belum ada, pekerjaan kayu bisa selesai tetapi kafe belum bisa buka.
-
-## Penutup
-
-Kafe yang hemat budget bukan kafe yang serba murah. Ia kafe yang tahu bagian mana yang menentukan pengalaman pelanggan dan bagian mana yang bisa ditunda. Bar yang kokoh, tempat duduk yang tidak melengkung, dan pencahayaan yang tepat akan terasa jauh lebih penting daripada dinding berlapis material mahal.
-
-Untuk melihat contoh pekerjaan fit-out, buka [portofolio](/portfolio/). Lingkup pekerjaan toko dan booth ada di halaman [interior toko, mall, dan booth pameran](/layanan/interior-toko-mall-booth-pameran-baturaja/). Kirim denah dan target anggaran lewat [kontak kami](/kontak/) untuk pembahasan awal.
+Kami adalah [interior baturaja](/) workshop interior dan fit-out komersial yang mengerjakan produksi modular untuk kafe, bakery, dan toko di OKU Raya, mulai dari bar counter sampai display. Lihat [layanan interior toko, mall, dan booth](/layanan/interior-toko-mall-booth-pameran-baturaja/) untuk rincian lingkup kerja, atau langsung konsultasi lewat WhatsApp di 0853-1002-4736. Konsultasi awal dan estimasi kasar tidak dipungut biaya.

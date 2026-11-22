@@ -198,7 +198,9 @@ export function areaServiceSchema(
 }
 
 export function articleSchema(post: Post, url: string) {
-  const isPortfolio = post.data.category === 'Portfolio';
+  const isPortfolio = Array.isArray(post.data.category)
+    ? post.data.category.includes('Portfolio')
+    : post.data.category === 'Portfolio';
   return {
     '@type': isPortfolio ? 'CreativeWork' : 'BlogPosting',
     '@id': `${url}#article`,

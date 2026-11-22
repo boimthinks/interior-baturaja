@@ -1,13 +1,13 @@
 ---
 import { getCollection, render } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
-import { getPublishedPosts, relatedPosts } from '../../lib/content';
+import { getPublishedPosts, relatedPosts, isBlog, primaryCategory } from '../../lib/content';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts', ({ data }) => !data.draft && data.category === 'Blog');
+  const posts = await getCollection('posts', ({ data }) => !data.draft && isBlog({ data } as any));
   const all = await getPublishedPosts();
 
-  return posts.map((post) => ({
+  return posts.filter((post) => primaryCategory(post) === 'Blog').map((post) => ({
     params: { slug: post.id },
     props: { post, related: relatedPosts(post, all, 4) },
   }));

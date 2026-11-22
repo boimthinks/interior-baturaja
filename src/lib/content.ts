@@ -13,6 +13,28 @@ export function sortByDate(a: Post, b: Post) {
   return (b.data.pubDate?.valueOf() ?? 0) - (a.data.pubDate?.valueOf() ?? 0);
 }
 
+/** Normalisasi category ke array */
+function categories(p: Post): string[] {
+  return Array.isArray(p.data.category) ? p.data.category : [p.data.category];
+}
+
+export function isBlog(p: Post): boolean {
+  return categories(p).includes('Blog');
+}
+
+export function isPortfolio(p: Post): boolean {
+  return categories(p).includes('Portfolio');
+}
+
+/** Kategori utama penentu URL kanonik: Portfolio menang bila dual */
+export function primaryCategory(p: Post): 'Blog' | 'Portfolio' {
+  return isPortfolio(p) ? 'Portfolio' : 'Blog';
+}
+
+export function categoryLabel(p: Post): string {
+  return primaryCategory(p) === 'Portfolio' ? 'Proyek' : 'Artikel';
+}
+
 /** Semua post yang boleh tampil (bukan draft) */
 export async function getPublishedPosts(): Promise<Post[]> {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -21,19 +43,19 @@ export async function getPublishedPosts(): Promise<Post[]> {
 
 export async function getBlogPosts(): Promise<Post[]> {
   const posts = await getPublishedPosts();
-  return posts.filter((p) => p.data.category === 'Blog');
+  return posts.filter(isBlog);
 }
 
 export async function getPortfolioPosts(): Promise<Post[]> {
   const posts = await getPublishedPosts();
-  return posts.filter((p) => p.data.category === 'Portfolio');
+  return posts.filter(isPortfolio);
 }
 
 /** Artikel terkait berdasarkan tag yang sama, lalu tanggal terbaru */
 export function relatedPosts(current: Post, all: Post[], limit = 4): Post[] {
   const currentTags = new Set(current.data.tags);
   return all
-    .filter((p) => p.id !== current.id && p.data.category === current.data.category)
+    .filter((p) => p.id !== current.id && primaryCategory(p) === primaryCategory(current))
     .map((p) => ({
       post: p,
       score: p.data.tags.filter((t) => currentTags.has(t)).length,

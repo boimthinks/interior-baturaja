@@ -18,8 +18,10 @@ export async function getStaticPaths() {
     const related = posts
       .filter((p) => p.data.tags.includes(tag))
       .sort((a, b) => {
-        if (a.data.category !== b.data.category) {
-          return a.data.category === 'Portfolio' ? -1 : 1;
+        const aPort = a.data.category.includes('Portfolio') || a.data.category === 'Portfolio';
+        const bPort = b.data.category.includes('Portfolio') || b.data.category === 'Portfolio';
+        if (aPort !== bPort) {
+          return aPort ? -1 : 1;
         }
         return (b.data.pubDate?.valueOf() ?? 0) - (a.data.pubDate?.valueOf() ?? 0);
       })

@@ -27,7 +27,7 @@ const posts = defineCollection({
     description: z.string(),
     pubDate: z.coerce.date().optional(),
     updatedDate: z.coerce.date().optional(),
-    category: z.enum(['Blog', 'Portfolio']),    tags: z.array(z.enum(POST_TAGS)).min(1),
+    category: z.union([z.enum(['Blog', 'Portfolio']), z.array(z.enum(['Blog', 'Portfolio'])).min(1)]),    tags: z.array(z.enum(POST_TAGS)).min(1),
     targetKeywords: z.array(z.string()).default([]),
     relatedServiceUrl: z.string(),
     heroImage: z.string().optional(),

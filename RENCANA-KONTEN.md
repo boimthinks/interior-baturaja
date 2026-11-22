@@ -59,7 +59,7 @@ Total: **60 konten** dalam satu koleksi `src/content/posts/` (dibedakan frontmat
 | 39 | Booth Pameran Knock-Down untuk Instansi dan UMKM | Blog | `booth-pameran-knock-down-instansi-umkm-oku-raya.md` |
 | 40 | Renovasi Interior Toko: Rak Display, Etalase & Kasir | Blog | `renovasi-interior-toko-rak-display-etalase-kasir.md` |
 | 41 | Standar Rak Display dan Meja Racik Apotek & Kosmetik | Blog | `standar-rak-display-meja-racik-apotek-kosmetik.md` |
-| 42 | Desain Interior Kafe, Bakery & Coffee Shop Hemat Budget | Blog | `desain-interior-kafe-bakery-hemat-budget-baturaja.md` |
+| 42 | ~~Desain Interior Kafe, Bakery & Coffee Shop Hemat Budget~~ (Terbit 2026-11-22, judul final: Desain Interior Kafe dan Coffee Shop Hemat Budget Baturaja) | Blog | `desain-interior-kafe-bakery-hemat-budget-baturaja.md` |
 | 43 | Interior Mess Karyawan & Kantor Kontraktor Tambang | Blog | `interior-mess-karyawan-kantor-tambang-tanjung-enim.md` |
 | 44 | Tips Desain Pencahayaan Etalase dan Rak Display | Blog | `tips-pencahayaan-etalase-rak-display-toko.md` |
 | 45 | Kontraktor Interior Homestay, Villa & Restoran Danau Ranau | Blog | `kontraktor-interior-homestay-villa-danau-ranau.md` |

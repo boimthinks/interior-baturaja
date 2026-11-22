@@ -183,12 +183,10 @@ const schema = [
           <PostCard
             href={`/portfolio/${post.id}/`}
             title={post.data.title}
-            description={post.data.description}
             image={post.data.heroImage}
-            date={post.data.pubDate}
             category="Portfolio"
             tags={post.data.tags}
-            readingMinutes={readingTime(post.body)}
+            compact={true}
           />
         ))}
       </div>

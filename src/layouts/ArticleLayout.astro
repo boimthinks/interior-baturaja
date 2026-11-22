@@ -7,7 +7,7 @@ import JsonLd from '../components/JsonLd.astro';
 import { SITE, waLink, formatDate } from '../config/site';
 import { SERVICES } from '../data/services';
 import { articleSchema, breadcrumbSchema, faqSchema, businessSchema, organizationSchema, websiteSchema } from '../lib/schema';
-import { readingTime, type Post } from '../lib/content';
+import { readingTime, primaryCategory, type Post } from '../lib/content';
 
 interface Heading {
   depth: number;
@@ -153,9 +153,9 @@ const schemaGraph = [
             </h3>
             <div class="article-related-grid">
               {related.map((rel) => (
-                <a class="article-related-card" href={`/${rel.data.category === 'Portfolio' ? 'portfolio' : 'blog'}/${rel.id}/`}>
+                <a class="article-related-card" href={`/${primaryCategory(rel) === 'Portfolio' ? 'portfolio' : 'blog'}/${rel.id}/`}>
                   <div class="article-related-thumb">
-                    <Visual src={rel.data.heroImage} alt={rel.data.title} ratio="4 / 3" label={rel.data.category} />
+                    <Visual src={rel.data.heroImage} alt={rel.data.title} ratio="4 / 3" label={primaryCategory(rel)} />
                   </div>
                   <div class="article-related-info">
                     <h4>{rel.data.title}</h4>

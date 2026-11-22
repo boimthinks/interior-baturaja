@@ -17,7 +17,7 @@ import {
   breadcrumbSchema,
   faqSchema,
 } from '../lib/schema';
-import { readingTime, type Post } from '../lib/content';
+import { readingTime, primaryCategory, type Post } from '../lib/content';
 
 interface Props {
   service: Service;
@@ -256,12 +256,12 @@ const schemaGraph = [
             <div class="card-grid">
               {related.map((post) => (
                 <PostCard
-                  href={`/${post.data.category === 'Portfolio' ? 'portfolio' : 'blog'}/${post.id}/`}
+                  href={`/${primaryCategory(post) === 'Portfolio' ? 'portfolio' : 'blog'}/${post.id}/`}
                   title={post.data.title}
                   description={post.data.description}
                   image={post.data.heroImage}
                   date={post.data.pubDate}
-                  category={post.data.category}
+                  category={primaryCategory(post)}
                   tags={post.data.tags}
                   readingMinutes={readingTime(post.body)}
                 />

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { isPortfolio } from '../../lib/content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import PostCard from '../../components/PostCard.astro';
@@ -11,12 +12,11 @@ import { SERVICE_TAGS } from '../../config/tags';
 import { readingTime } from '../../lib/content';
 import { businessSchema, organizationSchema, websiteSchema, breadcrumbSchema, itemListSchema } from '../../lib/schema';
 
-const posts = (await getCollection('posts', ({ data }) => !data.draft && data.category === 'Portfolio')).sort(
+const posts = (await getCollection('posts', ({ data }) => !data.draft && isPortfolio({ data } as any))).sort(
   (a, b) => (b.data.pubDate?.valueOf() ?? 0) - (a.data.pubDate?.valueOf() ?? 0)
 );
 
-const url = new URL('/portfolio/', SITE.domain).href;
-const schema = [
+const url = new URL('/portfolio/', SITE.domain).href;const schema = [
   businessSchema(),
   organizationSchema(),
   websiteSchema(),
