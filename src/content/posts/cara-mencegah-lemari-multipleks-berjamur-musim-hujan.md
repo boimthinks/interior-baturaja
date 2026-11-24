@@ -1,10 +1,12 @@
 ---
-title: "Cara Mencegah Lemari Multipleks Berjamur Saat Musim Hujan di Sumatera Selatan"
-description: "Penyebab lemari multipleks berjamur di musim hujan dan cara mencegahnya: sirkulasi, jarak dinding, edging, PVC board, serta tanda-tanda kerusakan yang perlu dicek."
+title: "Cara Mencegah Lemari Multipleks Berjamur Musim Hujan"
+description: "Penyebab lemari multipleks berjamur di musim hujan Baturaja dan cara mencegahnya lewat sirkulasi, jarak dinding, edging, dan PVC board 18mm."
 category: "Blog"
-tags: ["Lemari & Kamar Set", "Edukasi & Material"]
+tags: ["Lemari & Kamar Set", "Edukasi & Material", "Baturaja"]
 targetKeywords: ["lemari multipleks berjamur", "cara mencegah jamur lemari", "lemari lembap musim hujan", "multipleks 18mm anti jamur"]
 relatedServiceUrl: "/layanan/lemari-custom-kamar-set-baturaja/"
+heroImage: "/images/blog/cara-mencegah-lemari-multipleks-berjamur-musim-hujan.webp"
+heroAlt: "Teknisi memeriksa plint dan celah ventilasi lemari pakaian multipleks HPL di kamar tidur"
 faqs:
   - question: "Mengapa lemari multipleks mudah berjamur di musim hujan?"
     answer: "Karena multipleks menyerap uap air dari udara dan dari dinding yang lembap. Kalau lemari menempel rapat ke dinding tanpa sirkulasi, kelembapan terperangkap dan jamur tumbuh pada suhu 25 sampai 30 derajat Celsius."
@@ -14,7 +16,7 @@ faqs:
     answer: "PVC board tidak menyerap air sehingga tidak menjadi media tumbuh jamur. Namun jamur masih bisa menempel pada permukaan HPL yang kotor, jadi kebersihan tetap perlu dijaga."
   - question: "Berapa jarak ideal antara lemari dan dinding?"
     answer: "Sekitar 3 sampai 5 sentimeter agar udara bisa mengalir. Kalau tidak memungkinkan, pasang lapisan penahan uap di belakang lemari dan biarkan celah di bagian atas terbuka."
-draft: true
+pubDate: 2026-11-24
 ---
 
 Musim hujan di Sumatera Selatan membawa perubahan yang cepat. Pagi terasa dingin dan lembap, siang panas, sore hujan lagi. Pergantian seperti ini membuat uap air masuk-keluar ruangan terus-menerus, dan lemari yang menempel rapat di dinding menjadi salah satu tempat pertama yang menunjukkannya.
@@ -49,15 +51,15 @@ Jamur membutuhkan tiga hal: kelembapan di atas 70 persen, suhu hangat, dan permu
 
 Bagian ini yang paling menentukan, karena setelah lemari terpasang, pilihannya menjadi terbatas.
 
-**Beri jarak dari dinding.** Kami biasanya menyisakan 3–5 sentimeter di belakang lemari. Untuk lemari full plafon, celah itu ditutup panel atas berlubang agar tidak terlihat dari depan tetapi udara tetap bisa lewat.
+**Beri jarak dari dinding.** Kami biasanya menyisakan 3 sampai 5 sentimeter di belakang lemari. Untuk lemari full plafon, celah itu ditutup panel atas berlubang agar tidak terlihat dari depan tetapi udara tetap bisa lewat.
 
 **Pilih material sesuai lokasi.** Untuk dinding yang berbatasan dengan kamar mandi, rumah panggung, atau area dekat Danau Ranau, bagian badan lemari yang dekat lantai sebaiknya memakai PVC board 18mm. PVC tidak menyerap air, jadi tidak menjadi media jamur. Bagian atas tetap multipleks 18mm karena lebih kuat menahan beban gantungan.
 
 **Tutup semua tepi potongan.** Edging PVC di seluruh tepi papan, termasuk tepi yang tersembunyi di dalam. Ini pekerjaan yang tidak terlihat, tetapi menentukan umur lemari.
 
-**Pasang plint atau kaki.** Lemari tidak menempel langsung ke lantai. Plint PVC setinggi 5–8 sentimeter membuat sirkulasi udara di bawah lemari tetap ada dan melindungi papan dari air pel.
+**Pasang plint atau kaki.** Lemari tidak menempel langsung ke lantai. Plint PVC setinggi 5 sampai 8 sentimeter membuat sirkulasi udara di bawah lemari tetap ada dan melindungi papan dari air pel.
 
-**Rencanakan ventilasi.** Kalau lemari menutup seluruh dinding, buat lubang ventilasi kecil di panel atas atau sisakan celah 3–5 sentimeter dari plafon yang ditutup kasa agar serangga tidak masuk.
+**Rencanakan ventilasi.** Kalau lemari menutup seluruh dinding, buat lubang ventilasi kecil di panel atas atau sisakan celah 3 sampai 5 sentimeter dari plafon yang ditutup kasa agar serangga tidak masuk.
 
 **Hindari panel belakang penuh pada dinding lembap.** Untuk dinding yang benar-benar bermasalah, bagian belakang lemari bisa dibiarkan terbuka dengan rangka, atau diberi lapisan penahan uap sebelum lemari dipasang.
 
@@ -65,7 +67,7 @@ Bagian ini yang paling menentukan, karena setelah lemari terpasang, pilihannya m
 
 Tidak perlu rumit. Yang penting dilakukan secara konsisten:
 
-- **Buka pintu lemari 15–30 menit** saat pagi hari, terutama di musim hujan. Ini yang paling murah dan paling efektif.
+- **Buka pintu lemari 15 sampai 30 menit** saat pagi hari, terutama di musim hujan. Ini yang paling murah dan paling efektif.
 - **Jangan menaruh lemari tepat di depan jendela** yang menjadi satu-satunya sumber udara.
 - **Bersihkan bagian belakang** setiap tiga bulan. Debu yang menempel menahan kelembapan.
 - **Gunakan wadah tertutup** untuk sepatu dan barang yang baru dipakai.

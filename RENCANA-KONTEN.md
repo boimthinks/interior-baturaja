@@ -27,7 +27,7 @@ Total: **60 konten** dalam satu koleksi `src/content/posts/` (dibedakan frontmat
 | 15 | Paket Kamar Set Pengantin Baru di Baturaja | Blog | `paket-kamar-set-pengantin-baturaja.md` |
 | 16 | 8 Ide Lemari Bawah Tangga Multifungsi | Blog | `ide-lemari-bawah-tangga-multifungsi.md` |
 | 17 | Desain Walk-In Closet Minimalis dengan Pintu Kaca dan LED | Blog | `desain-walk-in-closet-minimalis-pintu-kaca-led.md` |
-| 18 | Cara Mencegah Lemari Multipleks Berjamur Saat Musim Hujan | Blog | `cara-mencegah-lemari-multipleks-berjamur-musim-hujan.md` |
+| 18 | ~~Cara Mencegah Lemari Multipleks Berjamur Saat Musim Hujan~~ (Terbit 2026-11-24, judul final: Cara Mencegah Lemari Multipleks Berjamur Musim Hujan) | Blog | `cara-mencegah-lemari-multipleks-berjamur-musim-hujan.md` |
 | 19 | Desain Kamar Tidur Anak Custom: Tempat Tidur Tingkat | Blog | `desain-kamar-tidur-anak-custom-tempat-tidur-tingkat.md` |
 | 20 | Lemari Custom Workshop vs Lemari Pabrikan Toko | Blog | `lemari-custom-workshop-vs-lemari-pabrikan.md` |
 | 21 | Inspirasi Dipan Custom dengan Laci Tersembunyi (Storage Bed) | Blog | `inspirasi-dipan-custom-storage-bed-laci.md` |
