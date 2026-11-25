@@ -22,3 +22,6 @@ Thumbs.db
 # editor
 .vscode/
 .idea/
+
+# arsip draft yang dikarantina, tidak boleh terbangun oleh Astro
+_karantina/

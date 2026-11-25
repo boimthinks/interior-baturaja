@@ -183,12 +183,26 @@ Waktu dihitung setelah desain disetujui & DP, belum termasuk antrean musim ramai
 
 ## 9. Konten Terbit
 
-### Blog (44)
-Status diisi otomatis dari file `src/content/posts/`. Lihat `RENCANA-KONTEN.md` untuk daftar lengkap judul.
+Satu koleksi `src/content/posts/`, dibedakan `category` (`Blog` atau `Portfolio`).
+Daftar lengkap judul dan urutan pengerjaan ada di `RENCANA-KONTEN.md`.
 
-### Portfolio (16)
+### Blog (46)
+### Portfolio (14)
 Setiap portfolio wajib memiliki `projectDetails` (klien/proyek, lokasi, material, durasi, tahun)
 dan minimal 3 FAQ teknis.
+
+**Status per 2026-11-25:** 12 artikel terbit (7 Blog + 5 Portfolio), 48 draft.
+Artikel terbit memakai `draft: false` dan `pubDate` tanggal sungguhan. Artikel
+draft memakai `draft: true` dan boleh belum punya `pubDate`.
+
+Aturan penerbitan:
+- Satu hari satu artikel.
+- Terbitkan hanya lewat `python3 _workflow/terbit.py terbit --site interiorbaturaja.web.id`
+  dari folder induk. Perintah itu mengisi `pubDate` dengan tanggal hari ini.
+- Artikel draft tidak dibangun menjadi halaman, tidak masuk sitemap, dan tidak
+  muncul di beranda maupun daftar blog/portfolio.
+- Jangan menambahkan slug draft ke `public/llms.txt` atau `public/llms-full.txt`
+  sebelum artikelnya terbit.
 
 ---
 
@@ -197,8 +211,16 @@ dan minimal 3 FAQ teknis.
 - Logo: `public/interior-baturaja.svg` (turunan dari `logo/interior-batam.svg`).
 - Favicon set: `public/favicon-*.png`, `apple-touch-icon.png`, `mstile-*.png`, `maskable_icon.png`.
 - OG image 1200×630: digenerate otomatis oleh `scripts/generate-og.mjs` ke `public/og/`.
-- Gambar dalam konten: rasio **4:3**.
-- Placeholder visual: komponen `Visual.astro` (blueprint SVG) selama foto proyek belum tersedia.
+- Gambar dalam konten: rasio **4:3**, WebP, sisi terpanjang 800 px.
+- **Nama berkas gambar = slug artikel.** Blog ke `public/images/blog/<slug>.webp`,
+  Portfolio ke `public/images/portfolio/<slug>.webp`. Jangan memakai nama lain
+  dan jangan memakai URL eksternal, supaya `_workflow/gambar.py` bisa menaruh
+  hasil generate tepat di path yang diminta frontmatter.
+- Prompt gambar dicatat lewat `python3 _workflow/gambar.py prompt --site interiorbaturaja.web.id --slug <slug> --teks "<prompt Inggris>" --rasio 4:3`.
+  Hasil Google Flow disimpan di `_workflow/inbox-gambar/interiorbaturaja.web.id/<slug>.png`,
+  lalu `python3 _workflow/gambar.py sync --site interiorbaturaja.web.id`.
+- Placeholder visual: komponen `Visual.astro` (blueprint SVG) dipakai otomatis
+  selama `heroImage` belum ada, jadi draft tanpa gambar tetap aman direview.
 - Palet: royal blue `#1e40af`, champagne gold `#b89150`, latar `#f7f8fb`.
 
 ---

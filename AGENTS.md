@@ -4,6 +4,44 @@
 - Selalu berkomunikasi dengan pengguna dalam **Bahasa Indonesia**.
 - Jangan pernah `git commit` / `git push` tanpa instruksi eksplisit.
 
+## Alur Kerja Harian (wajib, jangan improvisasi)
+Project ini memakai alur 4 fase dari folder induk `/home/abah/Work/Webs`
+(lihat `_workflow/situs.py` sebagai sumber kebenaran mesin):
+
+| Fase | Perintah | Catatan |
+|---|---|---|
+| A. Tulis konten | riset `pakar-entity-seo` lalu tulis dengan `penulis-ahli` | satu artikel per giliran, `draft: true` |
+| B. Gambar | `python3 _workflow/gambar.py siap ...` lalu `sync` | memasang `heroImage` + prompt ke `_workflow/inbox-gambar/ANTREAN.md` |
+| C. Review | `python3 _workflow/dev.py buka --site interiorbaturaja.web.id` | port tetap `4329` |
+| D. Kirim | `python3 _workflow/ship.py --site interiorbaturaja.web.id --deploy` | build, commit, push, deploy cPanel |
+
+Aturan yang mengikat:
+- **Draft dan terbit.** Artikel baru **wajib** `draft: true` dan `pubDate` boleh
+  kosong. Jangan pernah mengubah `draft: false` secara manual. Satu-satunya cara
+  menerbitkan adalah `python3 _workflow/terbit.py terbit --site interiorbaturaja.web.id`.
+  Perintah itu mengisi `pubDate` dengan **tanggal hari ini** dan menyalakan
+  `draft: false`. Satu hari satu artikel.
+- **Jangan `git add -A`.** Stage hanya berkas yang memang berubah. `ship.py`
+  sudah menangani ini dan menolak commit kosong.
+- **Gambar artikel** memakai path lokal `/images/blog/<slug-artikel>.webp`
+  (atau `/images/portfolio/<slug>.webp` untuk Portfolio). Nama berkas harus
+  sama dengan slug artikel. Jangan memakai URL eksternal. Cara praktis
+  memasangnya tanpa salah ketik:
+  `python3 _workflow/gambar.py siap --site interiorbaturaja.web.id --slug <slug> --teks "<prompt>"`
+  Perintah itu memilih folder yang benar menurut `category` dan mengisi
+  `heroImage` otomatis.
+- **Terbit tanpa gambar ditolak.** `terbit.py` menolak artikel yang
+  `heroImage`-nya menunjuk berkas yang belum ada di `public/`. Selesaikan dulu
+  pabrik gambar, baru terbitkan.
+- **Tautan internal wajib diperiksa.** Build Astro tidak memvalidasi tautan
+  manual, jadi jalankan `python3 _workflow/cek_tautan.py --site interiorbaturaja.web.id`
+  sebelum commit. `ship.py` juga menjalankan pemeriksaan ini sebagai gerbang.
+- **`llms.txt` dan `llms-full.txt` statis.** Jangan menambahkan slug draft ke
+  sana sebelum artikelnya benar-benar terbit.
+- Kalau output `ship.py` terlihat seperti `clean — nothing to commit` padahal
+  ada perubahan, alihkan ke file (`> /tmp/ship.txt 2>&1`) lalu baca file itu.
+  Tampilan terminal bisa palsu.
+
 ## Akses Data Bisnis
 Semua fakta brand, harga, NAP, aturan menulis, dan daftar artikel terbit ada di
 **[`SUMBER-PENGETAHUAN.md`](./SUMBER-PENGETAHUAN.md)**. Baca file itu sebelum menulis atau mengubah konten.
@@ -37,7 +75,7 @@ src/
   lib/          content.ts (query helper), schema.ts (JSON-LD @graph builder)
   pages/        index, layanan/[slug], area-layanan/[slug], blog/[slug],
                 portfolio/[slug], tentang-kami, kontak, 404
-  content/posts/ 44 Blog + 16 Portfolio (satu koleksi, dibedakan `category`)
+  content/posts/ 46 Blog + 14 Portfolio (satu koleksi, dibedakan `category`)
   plugins/      remark-autolinks.mjs
   styles/       global.css
 public/         logo, favicon, og/, llms.txt, llms-full.txt, robots.txt, .htaccess
@@ -54,13 +92,14 @@ npm run preview   # preview hasil build
 ## Konvensi Konten (frontmatter `src/content/posts/*.md`)
 ```yaml
 ---
-draft: true                  # WAJIB true saat dibuat; ubah ke false (atau hapus) saat TERBIT
+draft: true                  # WAJIB true saat dibuat; JANGAN ubah manual, pakai terbit.py
 title: "..."
 description: "..."            # 140–165 karakter
-pubDate: 2026-11-17           # WAJIB diisi saat artikel DITERBITKAN (draft:false)
+pubDate: 2026-11-17           # boleh kosong selama draft; terbit.py yang mengisi
 tags: ["Kitchen Set", "Harga & RAB", "Baturaja"]   # enum di src/content.config.ts
 targetKeywords: ["...", "..."]
 relatedServiceUrl: "/layanan/kitchen-set-baturaja/"
+heroImage: "/images/blog/<slug-artikel>.webp"      # wajib saat terbit, nama = slug artikel
 heroAlt: "..."                # opsional
 projectDetails:               # WAJIB untuk Portfolio
   clientOrProject: "..."
@@ -75,7 +114,10 @@ faqs:                         # minimal 3
 ```
 - Isi artikel: minimal 900 kata untuk Blog, 700 kata untuk Portfolio.
 - `pubDate` boleh kosong selama artikel masih `draft: true`. Saat menerbitkan
-  (alur 1 artikel/hari): isi `pubDate: YYYY-MM-DD`, hapus baris `draft: true`. 
+  (alur 1 artikel/hari): jalankan
+  `python3 _workflow/terbit.py terbit --site interiorbaturaja.web.id`.
+  Perintah itu mengisi `pubDate` dengan **tanggal hari ini** dan menyalakan
+  `draft: false`. Jangan mengedit dua field itu dengan tangan.
 - Struktur wajib: paragraf pembuka tanpa heading → `##` beberapa subjudul → penutup.
 - Tautan internal: gunakan path absolut (`/layanan/...`, `/blog/...`, `/portfolio/...`, `/kontak/`).
 - Jangan menuliskan kembali autolink yang sudah otomatis (plugin menangani frasa layanan).
@@ -96,18 +138,39 @@ faqs:                         # minimal 3
 - **Metode:** Build lokal, lalu upload `dist/` via skill `cpanel-domainesia`.
 
 ## Alur Rutin Commit, Push & Deploy (WAJIB IKUT SAAT DIMINTA)
-Alur standar setiap kali ada perubahan yang selesai dan diuji:
+Alur standar setiap kali ada perubahan yang selesai dan diuji. Semua langkah ini
+sudah dibungkus oleh satu perintah dari folder induk:
 
-1. **Build & verifikasi:** `npm run build` sampai exit code 0 (jangan deploy build yang gagal).
-2. **Commit:** `git add -A && git commit -m "<pesan commit ringkas dan spesifik>"`.
-3. **Push:** `git push origin main` (remote: `https://github.com/boimthinks/interior-baturaja.git`).
-4. **Deploy ke DomaiNesia:** `python3 /home/abah/.config/opencode/skills/cpanel-domainesia/scripts/deploy.py --target-dir interiorbaturaja`
-   - Flag `--target-dir interiorbaturaja` WAJIB karena nama folder server (`interiorbaturaja`)
-     berbeda dengan nama folder project lokal (`interiorbaturaja.web.id`). Tanpa flag itu
-     script berhenti dengan aman.
-   - Gunakan `--skip-build` bila `dist/` sudah terbaru dan tidak ada perubahan sejak build terakhir.
-5. **Verifikasi pasca-deploy:** `curl` beberapa URL kunci (homepage, satu halaman layanan, satu artikel)
-   dan pastikan status 200.
+```bash
+cd /home/abah/Work/Webs
+python3 _workflow/ship.py --site interiorbaturaja.web.id --deploy
+```
 
-Catatan: langkah 2-3 hanya dijalankan bila pengguna meminta commit/push secara eksplisit
-(sesuai aturan di bagian Komunikasi), sedangkan deploy ke DomaiNesia dieksekusi bila diminta.
+Yang dilakukan `ship.py`, berurutan, dan berhenti pada kegagalan pertama:
+
+1. **Cek gambar hilang.** Referensi lokal yang tidak ada di `public/` memblokir pengiriman.
+2. **Cek tautan internal** lewat `_workflow/cek_tautan.py`. Slug `/blog/...` atau
+   berkas `/images/...` yang tidak ada memblokir pengiriman.
+3. **Build:** `npm run build` (termasuk `scripts/generate-og.mjs`). Build gagal = tidak ada commit.
+4. **Commit + push** ke `origin main`, stage hanya berkas yang berubah,
+   tanpa `git add -A`.
+5. **Deploy ke DomaiNesia** hanya bila `--deploy` dan setelah konfirmasi `y`.
+   Flag `--target-dir interiorbaturaja` dipakai otomatis karena nama folder server
+   (`interiorbaturaja`) berbeda dengan folder project lokal (`interiorbaturaja.web.id`).
+6. **Verifikasi pasca-deploy:** `curl` homepage, satu halaman layanan, dan satu artikel, pastikan 200.
+
+Selalu jalankan `--dry-run` lebih dulu untuk melihat rencananya. Langkah 4 dan 5
+hanya dijalankan bila pengguna meminta commit/push/deploy secara eksplisit
+(sesuai aturan di bagian Komunikasi).
+
+Perintah manual yang setara, kalau `ship.py` sedang bermasalah:
+
+```bash
+npm run build                                              # wajib exit 0
+git add <berkas satu per satu>                             # JANGAN git add -A
+git commit -m "<pesan ringkas>"
+git push origin main
+python3 /home/abah/.config/opencode/skills/cpanel-domainesia/scripts/deploy.py --target-dir interiorbaturaja
+```
+
+Remote: `https://github.com/boimthinks/interior-baturaja.git`, branch `main`.

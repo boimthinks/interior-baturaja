@@ -3,6 +3,37 @@
 Total: **60 konten** dalam satu koleksi `src/content/posts/` (dibedakan frontmatter `category`).
 5 klaster mengikuti [`master_riset_seo_geo.md`](./master_riset_seo_geo.md) bagian 6.
 
+## Status Antrean (diperbarui 2026-11-25)
+- **12 terbit**, **7 draft**, **0 bersiap terbit**.
+- 48 draft lama hasil penulisan massal sudah dikarantina di `_karantina/2026-11-draft-massal/`
+  (di luar `src/content/posts/`, diabaikan git). Alasan dan cara memakai ulangnya ada di
+  `README.md` folder tersebut. Tujuh draft yang aktif sekarang adalah tujuh artikel
+  yang ditulis ulang dengan alur `pakar-entity-seo` + `penulis-ahli` per artikel.
+- Alur kerja: satu artikel per hari. Terbitkan hanya lewat
+  `python3 _workflow/terbit.py terbit --site interiorbaturaja.web.id` dari folder induk.
+- Lihat antrean terkini dengan `python3 _workflow/terbit.py daftar --site interiorbaturaja.web.id`.
+- Tabel di bawah memakai tanda berikut pada kolom STATUS:
+  - `TERBIT <tanggal>` = sudah tayang, punya `pubDate` dan `draft: false`.
+  - `draft` = sudah ditulis, `draft: true`, belum punya gambar dan `pubDate`.
+  - `belum` = belum ditulis.
+
+### Tujuh draft aktif (2026-11-25)
+
+| Klaster | Slug | Gambar |
+| --- | --- | --- |
+| Kitchen Set | `material-kitchen-set-zona-basah-kering-baturaja` | menunggu generate |
+| Kitchen Set | `kitchen-set-pvc-anti-rayap-rumah-panggung-baturaja` | menunggu generate |
+| Lemari & Kamar Set | `lemari-sliding-atau-swing-kamar-kecil-baturaja` | menunggu generate |
+| Lemari & Kamar Set | `urutan-pesan-kamar-set-pengantin-sebelum-akad-baturaja` | menunggu generate |
+| Backdrop & Partisi | `partisi-ruangan-backdrop-tv-aman-anak-baturaja` | menunggu generate |
+| Toko & Booth | `pencahayaan-toko-rak-display-etalase-baturaja` | menunggu generate |
+| Kantor & Instansi | `furnitur-mess-karyawan-tahan-penghuni-bergantian` | menunggu generate |
+
+Prompt gambar ketujuhnya sudah tercatat di `_workflow/inbox-gambar/ANTREAN.md`. Setelah
+gambar di-generate dan di-`sync`, artikel bisa diterbitkan satu per hari lewat `terbit.py`.
+
+Lihat [`AGENTS.md`](./AGENTS.md) bagian Alur Kerja Harian untuk aturan lengkapnya.
+
 ## Klaster 1 — Kitchen Set & Area Dapur
 | # | Judul | Kategori | File |
 | --- | --- | --- | --- |
