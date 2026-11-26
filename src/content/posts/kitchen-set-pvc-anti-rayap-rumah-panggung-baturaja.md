@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 title: "Kitchen Set PVC untuk Rumah Lembap dan Rumah Panggung OKU"
 description: "Kenapa rayap menyerang kitchen set, batas nyata PVC board, dan posisi mana yang tetap butuh multipleks. Panduan untuk rumah lembap di OKU Raya."
 category: "Blog"
@@ -20,7 +20,7 @@ faqs:
   - question: "Apakah rumah panggung di tepi Danau Ranau pasti butuh kitchen set PVC?"
     answer: "Tidak selalu, tetapi risikonya lebih tinggi. Kelembapan udara di sekitar danau dan sirkulasi udara di bawah lantai panggung membuat kayu lebih lambat kering. Bagian kabinet bawah yang paling dekat lantai adalah yang paling perlu dipertimbangkan untuk PVC."
 heroImage: "/images/blog/kitchen-set-pvc-anti-rayap-rumah-panggung-baturaja.webp"
-
+pubDate: 2026-11-26
 ---
 
 Rayap tidak datang tiba-tiba. Di rumah panggung sekitar Banding Agung dan tepian Danau Ranau, jalur tanahnya sering sudah ada jauh sebelum pemilik rumah memesan kitchen set. Furnitur baru hanya menjadi makanan berikutnya dalam antrean.
