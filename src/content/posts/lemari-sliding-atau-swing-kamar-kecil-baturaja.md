@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 title: "Lemari Sliding atau Swing untuk Kamar Kecil di Baturaja"
 description: "Hitung ruang yang benar-benar hilang, beban rel double track, dan kapan pintu swing lebih baik. Panduan memilih pintu lemari untuk kamar sempit."
 category: "Blog"
@@ -20,6 +20,7 @@ faqs:
   - question: "Apakah rel sliding bisa diperbaiki atau harus diganti?"
     answer: "Roda rel biasanya bisa diganti tanpa membongkar seluruh lemari. Rel aluminiumnya sendiri jarang rusak, kecuali bengkok akibat pintu yang terlepas. Kalau yang bengkok adalah rel, penggantiannya menuntut membuka pintu dan sebagian rangka, jadi lebih baik dicek sebelum pemasangan selesai."
 heroImage: "/images/blog/lemari-sliding-atau-swing-kamar-kecil-baturaja.webp"
+pubDate: 2026-11-27
 ---
 
 Kamar berukuran tiga kali tiga meter adalah ukuran yang paling sering saya temui saat survei di Baturaja. Di kamar sekecil itu, setiap sepuluh sentimeter menentukan apakah Anda bisa berjalan di samping tempat tidur atau tidak.
