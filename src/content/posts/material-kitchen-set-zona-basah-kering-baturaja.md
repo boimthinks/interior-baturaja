@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 title: "Kitchen Set Baturaja: Material Kabinet Bawah yang Tahan Lama"
 description: "Panduan memilih material kitchen set di Baturaja per zona dapur. Multipleks dan PVC board dipetakan sesuai posisi kabinet, plus simulasi biaya."
 category: "Blog"
@@ -20,7 +20,7 @@ faqs:
   - question: "Berapa lama pengerjaan kitchen set di workshop Baturaja?"
     answer: "Empat belas sampai dua puluh satu hari kerja setelah desain disetujui dan DP masuk. Waktu ini belum termasuk antrean musim ramai seperti akhir tahun, dan belum termasuk hari instalasi di lokasi yang biasanya dua sampai empat hari."
 heroImage: "/images/blog/material-kitchen-set-zona-basah-kering-baturaja.webp"
-
+pubDate: 2026-11-28
 ---
 
 Kabinet bawah kitchen set adalah bagian yang paling sering kami ganti saat menerima pekerjaan perbaikan. Bukan karena pemiliknya salah merawat, tetapi karena material yang dipakai di bawah wastafel sama dengan material di kabinet atas. Padahal keduanya menghadapi air dengan kadar yang jauh berbeda.
